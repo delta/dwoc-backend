@@ -4,6 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dbm": " ./node_modules/.bin/sequelize db:migrate",
+    "dbmu": " ./node_modules/.bin/sequelize db:migrate:undo",
+    "dbmua": " ./node_modules/.bin/sequelize db:migrate:undo:all",
+    "dbs": " ./node_modules/.bin/sequelize db:seed",
+    "dbmig": " ./node_modules/.bin/sequelize migration:generate",
+    "dbmog": " ./node_modules/.bin/sequelize model:generate",
+    "dbsg": " ./node_modules/.bin/sequelize seed:generate",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

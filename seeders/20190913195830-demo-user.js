@@ -13,12 +13,12 @@ module.exports = {
       }], {});
     */
     return queryInterface.bulkInsert('users', [{
-        firstName: 'test',
-	lastName: 'user',
-	email: 'test@delta.nitt.edu',
-	password: '$2y$12$gaiYXI1BJlws88ZqGcOdFO44NckUAVntsImFe9B36b5sZ8uQrVi.u',
-	createdAt: new Date(),
-	updatedAt: new Date(),
+      firstName: 'test',
+      lastName: 'user',
+      email: 'test@delta.nitt.edu',
+      password: '$2y$12$gaiYXI1BJlws88ZqGcOdFO44NckUAVntsImFe9B36b5sZ8uQrVi.u',
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }], {});
   },
 
@@ -30,6 +30,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
-      return queryInterface.bulkDelete('users',null,{});
+    return queryInterface.bulkDelete('users', null, {});
   }
 };
