@@ -1,0 +1,11 @@
+[ignore]
+./prisma/datamodel.prisma
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+
+[strict]
