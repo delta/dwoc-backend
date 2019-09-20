@@ -1,4 +1,48 @@
+enum roles {
+  Developer
+  Mentor
+  Admin
+}
+
 type User {
   id: ID! @id
-  name: String!
+  firstName: String!
+  lastName: String!
+  role: roles @default(value: Developer)
+  email: String
+  mobileNumber: String
+  githubHandle: String!
+  password: String
+  isVerified: Boolean @default(value:false)
+  session: String
+}
+
+type Mentor {
+  id: ID! @id
+  user: User! @relation(link: INLINE)
+  project: Project! @relation(link: INLINE)
+  
+}
+
+type Proposal {
+  id: ID! @id
+  user: User! @relation(link: INLINE)
+  project: Project! @relation(link: INLINE)
+  isAccepted: Boolean! @default(value: false)
+  propUrl: String!
+}
+
+type Project {
+  id: ID! @id
+  organization: Organization! @relation(link: INLINE)
+  projName: String!
+  projDesc: String
+  githubUrl: String
+}
+
+type Organization {
+  id: ID! @id
+  orgName: String!
+  orgDesc: String
+  githubUrl: String
 }
