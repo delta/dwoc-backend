@@ -46,3 +46,9 @@ type Organization {
   orgDesc: String
   githubUrl: String
 }
+
+type Event {
+  id: ID! @id
+  date: DateTime!
+  eventDesc: String!
+}
