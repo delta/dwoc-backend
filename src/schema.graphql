@@ -1,0 +1,39 @@
+type Query {
+    info: String!
+}
+
+type Mutation {
+    createNewUser(data: UserCreateInput!): User!
+}
+
+enum roles {
+  Developer
+  Mentor
+  Admin
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  role: roles
+  email: String
+  mobileNumber: String
+  githubHandle: String!
+  password: String
+  isVerified: Boolean
+  session: String
+}
+
+input UserCreateInput {
+  id: ID
+  firstName: String!
+  lastName: String!
+  role: roles
+  email: String
+  mobileNumber: String
+  githubHandle: String!
+  password: String
+  isVerified: Boolean
+  session: String
+}
