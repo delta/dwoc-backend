@@ -4,6 +4,7 @@ type Query {
 
 type Mutation {
     createNewUser(data: UserCreateInput!): User!
+    updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
 }
 
 enum roles {
@@ -36,4 +37,16 @@ input UserCreateInput {
   password: String
   isVerified: Boolean
   session: String
+}
+
+input UserUpdateInput {
+  firstName: String
+  lastName: String
+  email: String
+  mobileNumber: String
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  githubHandle: String
 }
