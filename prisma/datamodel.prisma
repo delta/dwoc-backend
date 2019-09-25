@@ -9,9 +9,9 @@ type User {
   firstName: String!
   lastName: String!
   role: roles @default(value: Developer)
-  email: String
-  mobileNumber: String
-  githubHandle: String!
+  email: String @unique
+  mobileNumber: String @unique
+  githubHandle: String! @unique
   password: String
   isVerified: Boolean @default(value:false)
   session: String
@@ -36,6 +36,7 @@ type Project {
   id: ID! @id
   organization: Organization! @relation(link: INLINE)
   projName: String!
+  projSlug: String! @unique
   projDesc: String
   githubUrl: String
 }
@@ -43,8 +44,9 @@ type Project {
 type Organization {
   id: ID! @id
   orgName: String!
+  orgSlug: String! @unique
   orgDesc: String
-  githubUrl: String
+  githubUrl: String @unique
 }
 
 type Event {
