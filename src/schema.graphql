@@ -1,0 +1,905 @@
+// @flow
+export const typeDefs = /* GraphQL */ `type AggregateMentor {
+  count: Int!
+}
+
+type AggregateOrganization {
+  count: Int!
+}
+
+type AggregateProject {
+  count: Int!
+}
+
+type AggregateProposal {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type BatchPayload {
+  count: Long!
+}
+
+scalar Long
+
+type Mentor {
+  id: ID!
+  user: User!
+  project: Project!
+}
+
+type MentorConnection {
+  pageInfo: PageInfo!
+  edges: [MentorEdge]!
+  aggregate: AggregateMentor!
+}
+
+input MentorCreateInput {
+  id: ID
+  user: UserCreateOneInput!
+  project: ProjectCreateOneInput!
+}
+
+type MentorEdge {
+  node: Mentor!
+  cursor: String!
+}
+
+enum MentorOrderByInput {
+  id_ASC
+  id_DESC
+}
+
+type MentorPreviousValues {
+  id: ID!
+}
+
+type MentorSubscriptionPayload {
+  mutation: MutationType!
+  node: Mentor
+  updatedFields: [String!]
+  previousValues: MentorPreviousValues
+}
+
+input MentorSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: MentorWhereInput
+  AND: [MentorSubscriptionWhereInput!]
+  OR: [MentorSubscriptionWhereInput!]
+  NOT: [MentorSubscriptionWhereInput!]
+}
+
+input MentorUpdateInput {
+  user: UserUpdateOneRequiredInput
+  project: ProjectUpdateOneRequiredInput
+}
+
+input MentorWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  user: UserWhereInput
+  project: ProjectWhereInput
+  AND: [MentorWhereInput!]
+  OR: [MentorWhereInput!]
+  NOT: [MentorWhereInput!]
+}
+
+input MentorWhereUniqueInput {
+  id: ID
+}
+
+type Mutation {
+  createMentor(data: MentorCreateInput!): Mentor!
+  updateMentor(data: MentorUpdateInput!, where: MentorWhereUniqueInput!): Mentor
+  upsertMentor(where: MentorWhereUniqueInput!, create: MentorCreateInput!, update: MentorUpdateInput!): Mentor!
+  deleteMentor(where: MentorWhereUniqueInput!): Mentor
+  deleteManyMentors(where: MentorWhereInput): BatchPayload!
+  createOrganization(data: OrganizationCreateInput!): Organization!
+  updateOrganization(data: OrganizationUpdateInput!, where: OrganizationWhereUniqueInput!): Organization
+  updateManyOrganizations(data: OrganizationUpdateManyMutationInput!, where: OrganizationWhereInput): BatchPayload!
+  upsertOrganization(where: OrganizationWhereUniqueInput!, create: OrganizationCreateInput!, update: OrganizationUpdateInput!): Organization!
+  deleteOrganization(where: OrganizationWhereUniqueInput!): Organization
+  deleteManyOrganizations(where: OrganizationWhereInput): BatchPayload!
+  createProject(data: ProjectCreateInput!): Project!
+  updateProject(data: ProjectUpdateInput!, where: ProjectWhereUniqueInput!): Project
+  updateManyProjects(data: ProjectUpdateManyMutationInput!, where: ProjectWhereInput): BatchPayload!
+  upsertProject(where: ProjectWhereUniqueInput!, create: ProjectCreateInput!, update: ProjectUpdateInput!): Project!
+  deleteProject(where: ProjectWhereUniqueInput!): Project
+  deleteManyProjects(where: ProjectWhereInput): BatchPayload!
+  createProposal(data: ProposalCreateInput!): Proposal!
+  updateProposal(data: ProposalUpdateInput!, where: ProposalWhereUniqueInput!): Proposal
+  updateManyProposals(data: ProposalUpdateManyMutationInput!, where: ProposalWhereInput): BatchPayload!
+  upsertProposal(where: ProposalWhereUniqueInput!, create: ProposalCreateInput!, update: ProposalUpdateInput!): Proposal!
+  deleteProposal(where: ProposalWhereUniqueInput!): Proposal
+  deleteManyProposals(where: ProposalWhereInput): BatchPayload!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+interface Node {
+  id: ID!
+}
+
+type Organization {
+  id: ID!
+  orgName: String!
+  orgDesc: String
+  githubUrl: String
+}
+
+type OrganizationConnection {
+  pageInfo: PageInfo!
+  edges: [OrganizationEdge]!
+  aggregate: AggregateOrganization!
+}
+
+input OrganizationCreateInput {
+  id: ID
+  orgName: String!
+  orgDesc: String
+  githubUrl: String
+}
+
+input OrganizationCreateOneInput {
+  create: OrganizationCreateInput
+  connect: OrganizationWhereUniqueInput
+}
+
+type OrganizationEdge {
+  node: Organization!
+  cursor: String!
+}
+
+enum OrganizationOrderByInput {
+  id_ASC
+  id_DESC
+  orgName_ASC
+  orgName_DESC
+  orgDesc_ASC
+  orgDesc_DESC
+  githubUrl_ASC
+  githubUrl_DESC
+}
+
+type OrganizationPreviousValues {
+  id: ID!
+  orgName: String!
+  orgDesc: String
+  githubUrl: String
+}
+
+type OrganizationSubscriptionPayload {
+  mutation: MutationType!
+  node: Organization
+  updatedFields: [String!]
+  previousValues: OrganizationPreviousValues
+}
+
+input OrganizationSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: OrganizationWhereInput
+  AND: [OrganizationSubscriptionWhereInput!]
+  OR: [OrganizationSubscriptionWhereInput!]
+  NOT: [OrganizationSubscriptionWhereInput!]
+}
+
+input OrganizationUpdateDataInput {
+  orgName: String
+  orgDesc: String
+  githubUrl: String
+}
+
+input OrganizationUpdateInput {
+  orgName: String
+  orgDesc: String
+  githubUrl: String
+}
+
+input OrganizationUpdateManyMutationInput {
+  orgName: String
+  orgDesc: String
+  githubUrl: String
+}
+
+input OrganizationUpdateOneRequiredInput {
+  create: OrganizationCreateInput
+  update: OrganizationUpdateDataInput
+  upsert: OrganizationUpsertNestedInput
+  connect: OrganizationWhereUniqueInput
+}
+
+input OrganizationUpsertNestedInput {
+  update: OrganizationUpdateDataInput!
+  create: OrganizationCreateInput!
+}
+
+input OrganizationWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  orgName: String
+  orgName_not: String
+  orgName_in: [String!]
+  orgName_not_in: [String!]
+  orgName_lt: String
+  orgName_lte: String
+  orgName_gt: String
+  orgName_gte: String
+  orgName_contains: String
+  orgName_not_contains: String
+  orgName_starts_with: String
+  orgName_not_starts_with: String
+  orgName_ends_with: String
+  orgName_not_ends_with: String
+  orgDesc: String
+  orgDesc_not: String
+  orgDesc_in: [String!]
+  orgDesc_not_in: [String!]
+  orgDesc_lt: String
+  orgDesc_lte: String
+  orgDesc_gt: String
+  orgDesc_gte: String
+  orgDesc_contains: String
+  orgDesc_not_contains: String
+  orgDesc_starts_with: String
+  orgDesc_not_starts_with: String
+  orgDesc_ends_with: String
+  orgDesc_not_ends_with: String
+  githubUrl: String
+  githubUrl_not: String
+  githubUrl_in: [String!]
+  githubUrl_not_in: [String!]
+  githubUrl_lt: String
+  githubUrl_lte: String
+  githubUrl_gt: String
+  githubUrl_gte: String
+  githubUrl_contains: String
+  githubUrl_not_contains: String
+  githubUrl_starts_with: String
+  githubUrl_not_starts_with: String
+  githubUrl_ends_with: String
+  githubUrl_not_ends_with: String
+  AND: [OrganizationWhereInput!]
+  OR: [OrganizationWhereInput!]
+  NOT: [OrganizationWhereInput!]
+}
+
+input OrganizationWhereUniqueInput {
+  id: ID
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Project {
+  id: ID!
+  organization: Organization!
+  projName: String!
+  projDesc: String
+  githubUrl: String
+}
+
+type ProjectConnection {
+  pageInfo: PageInfo!
+  edges: [ProjectEdge]!
+  aggregate: AggregateProject!
+}
+
+input ProjectCreateInput {
+  id: ID
+  organization: OrganizationCreateOneInput!
+  projName: String!
+  projDesc: String
+  githubUrl: String
+}
+
+input ProjectCreateOneInput {
+  create: ProjectCreateInput
+  connect: ProjectWhereUniqueInput
+}
+
+type ProjectEdge {
+  node: Project!
+  cursor: String!
+}
+
+enum ProjectOrderByInput {
+  id_ASC
+  id_DESC
+  projName_ASC
+  projName_DESC
+  projDesc_ASC
+  projDesc_DESC
+  githubUrl_ASC
+  githubUrl_DESC
+}
+
+type ProjectPreviousValues {
+  id: ID!
+  projName: String!
+  projDesc: String
+  githubUrl: String
+}
+
+type ProjectSubscriptionPayload {
+  mutation: MutationType!
+  node: Project
+  updatedFields: [String!]
+  previousValues: ProjectPreviousValues
+}
+
+input ProjectSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ProjectWhereInput
+  AND: [ProjectSubscriptionWhereInput!]
+  OR: [ProjectSubscriptionWhereInput!]
+  NOT: [ProjectSubscriptionWhereInput!]
+}
+
+input ProjectUpdateDataInput {
+  organization: OrganizationUpdateOneRequiredInput
+  projName: String
+  projDesc: String
+  githubUrl: String
+}
+
+input ProjectUpdateInput {
+  organization: OrganizationUpdateOneRequiredInput
+  projName: String
+  projDesc: String
+  githubUrl: String
+}
+
+input ProjectUpdateManyMutationInput {
+  projName: String
+  projDesc: String
+  githubUrl: String
+}
+
+input ProjectUpdateOneRequiredInput {
+  create: ProjectCreateInput
+  update: ProjectUpdateDataInput
+  upsert: ProjectUpsertNestedInput
+  connect: ProjectWhereUniqueInput
+}
+
+input ProjectUpsertNestedInput {
+  update: ProjectUpdateDataInput!
+  create: ProjectCreateInput!
+}
+
+input ProjectWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  organization: OrganizationWhereInput
+  projName: String
+  projName_not: String
+  projName_in: [String!]
+  projName_not_in: [String!]
+  projName_lt: String
+  projName_lte: String
+  projName_gt: String
+  projName_gte: String
+  projName_contains: String
+  projName_not_contains: String
+  projName_starts_with: String
+  projName_not_starts_with: String
+  projName_ends_with: String
+  projName_not_ends_with: String
+  projDesc: String
+  projDesc_not: String
+  projDesc_in: [String!]
+  projDesc_not_in: [String!]
+  projDesc_lt: String
+  projDesc_lte: String
+  projDesc_gt: String
+  projDesc_gte: String
+  projDesc_contains: String
+  projDesc_not_contains: String
+  projDesc_starts_with: String
+  projDesc_not_starts_with: String
+  projDesc_ends_with: String
+  projDesc_not_ends_with: String
+  githubUrl: String
+  githubUrl_not: String
+  githubUrl_in: [String!]
+  githubUrl_not_in: [String!]
+  githubUrl_lt: String
+  githubUrl_lte: String
+  githubUrl_gt: String
+  githubUrl_gte: String
+  githubUrl_contains: String
+  githubUrl_not_contains: String
+  githubUrl_starts_with: String
+  githubUrl_not_starts_with: String
+  githubUrl_ends_with: String
+  githubUrl_not_ends_with: String
+  AND: [ProjectWhereInput!]
+  OR: [ProjectWhereInput!]
+  NOT: [ProjectWhereInput!]
+}
+
+input ProjectWhereUniqueInput {
+  id: ID
+}
+
+type Proposal {
+  id: ID!
+  user: User!
+  project: Project!
+  isAccepted: Boolean!
+  propUrl: String!
+}
+
+type ProposalConnection {
+  pageInfo: PageInfo!
+  edges: [ProposalEdge]!
+  aggregate: AggregateProposal!
+}
+
+input ProposalCreateInput {
+  id: ID
+  user: UserCreateOneInput!
+  project: ProjectCreateOneInput!
+  isAccepted: Boolean
+  propUrl: String!
+}
+
+type ProposalEdge {
+  node: Proposal!
+  cursor: String!
+}
+
+enum ProposalOrderByInput {
+  id_ASC
+  id_DESC
+  isAccepted_ASC
+  isAccepted_DESC
+  propUrl_ASC
+  propUrl_DESC
+}
+
+type ProposalPreviousValues {
+  id: ID!
+  isAccepted: Boolean!
+  propUrl: String!
+}
+
+type ProposalSubscriptionPayload {
+  mutation: MutationType!
+  node: Proposal
+  updatedFields: [String!]
+  previousValues: ProposalPreviousValues
+}
+
+input ProposalSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ProposalWhereInput
+  AND: [ProposalSubscriptionWhereInput!]
+  OR: [ProposalSubscriptionWhereInput!]
+  NOT: [ProposalSubscriptionWhereInput!]
+}
+
+input ProposalUpdateInput {
+  user: UserUpdateOneRequiredInput
+  project: ProjectUpdateOneRequiredInput
+  isAccepted: Boolean
+  propUrl: String
+}
+
+input ProposalUpdateManyMutationInput {
+  isAccepted: Boolean
+  propUrl: String
+}
+
+input ProposalWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  user: UserWhereInput
+  project: ProjectWhereInput
+  isAccepted: Boolean
+  isAccepted_not: Boolean
+  propUrl: String
+  propUrl_not: String
+  propUrl_in: [String!]
+  propUrl_not_in: [String!]
+  propUrl_lt: String
+  propUrl_lte: String
+  propUrl_gt: String
+  propUrl_gte: String
+  propUrl_contains: String
+  propUrl_not_contains: String
+  propUrl_starts_with: String
+  propUrl_not_starts_with: String
+  propUrl_ends_with: String
+  propUrl_not_ends_with: String
+  AND: [ProposalWhereInput!]
+  OR: [ProposalWhereInput!]
+  NOT: [ProposalWhereInput!]
+}
+
+input ProposalWhereUniqueInput {
+  id: ID
+}
+
+type Query {
+  mentor(where: MentorWhereUniqueInput!): Mentor
+  mentors(where: MentorWhereInput, orderBy: MentorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Mentor]!
+  mentorsConnection(where: MentorWhereInput, orderBy: MentorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MentorConnection!
+  organization(where: OrganizationWhereUniqueInput!): Organization
+  organizations(where: OrganizationWhereInput, orderBy: OrganizationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Organization]!
+  organizationsConnection(where: OrganizationWhereInput, orderBy: OrganizationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OrganizationConnection!
+  project(where: ProjectWhereUniqueInput!): Project
+  projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project]!
+  projectsConnection(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectConnection!
+  proposal(where: ProposalWhereUniqueInput!): Proposal
+  proposals(where: ProposalWhereInput, orderBy: ProposalOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Proposal]!
+  proposalsConnection(where: ProposalWhereInput, orderBy: ProposalOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProposalConnection!
+  user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  node(id: ID!): Node
+}
+
+enum roles {
+  Developer
+  Mentor
+  Admin
+}
+
+type Subscription {
+  mentor(where: MentorSubscriptionWhereInput): MentorSubscriptionPayload
+  organization(where: OrganizationSubscriptionWhereInput): OrganizationSubscriptionPayload
+  project(where: ProjectSubscriptionWhereInput): ProjectSubscriptionPayload
+  proposal(where: ProposalSubscriptionWhereInput): ProposalSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  role: roles
+  email: String
+  mobileNumber: String
+  githubHandle: String!
+  password: String
+  isVerified: Boolean
+  session: String
+}
+
+type UserConnection {
+  pageInfo: PageInfo!
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  id: ID
+  firstName: String!
+  lastName: String!
+  role: roles
+  email: String
+  mobileNumber: String
+  githubHandle: String!
+  password: String
+  isVerified: Boolean
+  session: String
+}
+
+input UserCreateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  firstName_ASC
+  firstName_DESC
+  lastName_ASC
+  lastName_DESC
+  role_ASC
+  role_DESC
+  email_ASC
+  email_DESC
+  mobileNumber_ASC
+  mobileNumber_DESC
+  githubHandle_ASC
+  githubHandle_DESC
+  password_ASC
+  password_DESC
+  isVerified_ASC
+  isVerified_DESC
+  session_ASC
+  session_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  role: roles
+  email: String
+  mobileNumber: String
+  githubHandle: String!
+  password: String
+  isVerified: Boolean
+  session: String
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+  AND: [UserSubscriptionWhereInput!]
+  OR: [UserSubscriptionWhereInput!]
+  NOT: [UserSubscriptionWhereInput!]
+}
+
+input UserUpdateDataInput {
+  firstName: String
+  lastName: String
+  role: roles
+  email: String
+  mobileNumber: String
+  githubHandle: String
+  password: String
+  isVerified: Boolean
+  session: String
+}
+
+input UserUpdateInput {
+  firstName: String
+  lastName: String
+  role: roles
+  email: String
+  mobileNumber: String
+  githubHandle: String
+  password: String
+  isVerified: Boolean
+  session: String
+}
+
+input UserUpdateManyMutationInput {
+  firstName: String
+  lastName: String
+  role: roles
+  email: String
+  mobileNumber: String
+  githubHandle: String
+  password: String
+  isVerified: Boolean
+  session: String
+}
+
+input UserUpdateOneRequiredInput {
+  create: UserCreateInput
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
+}
+
+input UserWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  firstName: String
+  firstName_not: String
+  firstName_in: [String!]
+  firstName_not_in: [String!]
+  firstName_lt: String
+  firstName_lte: String
+  firstName_gt: String
+  firstName_gte: String
+  firstName_contains: String
+  firstName_not_contains: String
+  firstName_starts_with: String
+  firstName_not_starts_with: String
+  firstName_ends_with: String
+  firstName_not_ends_with: String
+  lastName: String
+  lastName_not: String
+  lastName_in: [String!]
+  lastName_not_in: [String!]
+  lastName_lt: String
+  lastName_lte: String
+  lastName_gt: String
+  lastName_gte: String
+  lastName_contains: String
+  lastName_not_contains: String
+  lastName_starts_with: String
+  lastName_not_starts_with: String
+  lastName_ends_with: String
+  lastName_not_ends_with: String
+  role: roles
+  role_not: roles
+  role_in: [roles!]
+  role_not_in: [roles!]
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  mobileNumber: String
+  mobileNumber_not: String
+  mobileNumber_in: [String!]
+  mobileNumber_not_in: [String!]
+  mobileNumber_lt: String
+  mobileNumber_lte: String
+  mobileNumber_gt: String
+  mobileNumber_gte: String
+  mobileNumber_contains: String
+  mobileNumber_not_contains: String
+  mobileNumber_starts_with: String
+  mobileNumber_not_starts_with: String
+  mobileNumber_ends_with: String
+  mobileNumber_not_ends_with: String
+  githubHandle: String
+  githubHandle_not: String
+  githubHandle_in: [String!]
+  githubHandle_not_in: [String!]
+  githubHandle_lt: String
+  githubHandle_lte: String
+  githubHandle_gt: String
+  githubHandle_gte: String
+  githubHandle_contains: String
+  githubHandle_not_contains: String
+  githubHandle_starts_with: String
+  githubHandle_not_starts_with: String
+  githubHandle_ends_with: String
+  githubHandle_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  isVerified: Boolean
+  isVerified_not: Boolean
+  session: String
+  session_not: String
+  session_in: [String!]
+  session_not_in: [String!]
+  session_lt: String
+  session_lte: String
+  session_gt: String
+  session_gte: String
+  session_contains: String
+  session_not_contains: String
+  session_starts_with: String
+  session_not_starts_with: String
+  session_ends_with: String
+  session_not_ends_with: String
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+}
+
+input UserWhereUniqueInput {
+  id: ID
+}
+`

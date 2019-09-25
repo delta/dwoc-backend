@@ -1,0 +1,357 @@
+mutation {
+  user1: createUser(
+    data: {
+      firstName: "ahmed"
+      lastName: "shamsudeen"
+      githubHandle: "ahmed-10"
+    }
+  ) {
+    id
+  }
+  user2: createUser(
+    data: {
+      firstName: "agu"
+      lastName: "shamsudeen"
+      githubHandle: "ahmed-20"
+    }
+  ) {
+    id
+  }
+  org1: createOrganization(data: {
+       orgName: "delta-NITT"
+       orgSlug: "delta" 
+    }) {
+    id
+  }
+  org2: createOrganization(data: {
+       orgName: "deltaForce-NITT"
+       orgSlug: "deltanit" 
+    }) {
+    id
+  }
+
+  project1: createProject(
+    data: {
+      organization: { connect: { orgSlug: "delta" } }
+      projName: "dwocproj-NITT"
+      projDesc: "therila"
+      projSlug: "dwocproj1"
+      githubUrl: "some"
+    }
+  ) {
+    id
+  }
+  project2: createProject(
+    data: {
+      organization: { connect: { orgSlug: "deltanit" } }
+      projName: "dwocproj-NITT"
+      projDesc: "therila"
+      projSlug: "dwocproj2"
+      githubUrl: "some"
+    }
+  ) {
+    id
+  }
+  mentor1: createMentor(
+    data: {
+      user: { connect: { githubHandle: "ahmed-10" } }
+      project: { connect: { projSlug: "dwocproj1" } }
+    }
+  ) {
+    id
+  }
+  mentor2: createMentor(
+    data: {
+      user: { connect: { githubHandle: "ahmed-20" } }
+      project: { connect: { projSlug: "dwocproj2" } }
+    }
+  ) {
+    id
+  }
+
+  proposal1: createProposal(
+    data: {
+      user: { connect: { githubHandle: "ahmed-10" } }
+      project: { connect: { projSlug: "dwocproj1" } }
+      isAccepted: false
+      propUrl: "something"
+    }
+  ) {
+    id
+  }
+  proposal2: createProposal(
+    data: {
+      user: { connect: { githubHandle: "ahmed-20" } }
+      project: { connect: { projSlug: "dwocproj2" } }
+      isAccepted: false
+      propUrl: "therila"
+    }
+  ) {
+    id
+  }
+  event1: createEvent(
+      data: {
+          date: "2007-12-03T10:15:30Z"
+          eventDesc: "this is a good event"
+      }
+  )
+  {
+    id
+  }
+  event2: createEvent(
+      data: {
+          date: "2007-12-03T10:15:30Z"
+          eventDesc: "this is a very good event"
+      }
+  )
+  {
+    id
+  }
+
+
+  user5: createUser(
+    data: {
+      firstName: "Pranav"
+      lastName: "Shriram"
+      githubHandle: "abcdef@github"
+    }
+  ) {
+    id
+  }
+
+  org5: createOrganization(data: { orgName: "Mozilla", orgSlug: "mozilla" }) {
+    id
+  }
+
+  proj5: createProject(
+    data: {
+      projName: "Firefox"
+      projSlug: "firefox"
+      organization: { connect: { orgSlug: "mozilla" } }
+    }
+  ) {
+    id
+  }
+
+  mentor5: createMentor(
+    data: {
+      user: { connect: { githubHandle: "abcdef@github" } }
+      project: { connect: { projSlug: "firefox" } }
+    }
+  ) {
+    id
+  }
+  proposal5: createProposal(
+    data: {
+      user: { connect: { githubHandle: "abcdef@github" } }
+      project: { connect: { projSlug: "firefox" } }
+      isAccepted: false
+      propUrl: "https://www.google.com"
+    }
+  ) {
+    id
+  }
+
+  event5: createEvent(
+    data: { eventDesc: "Hello World", date: "2007-12-03T10:15:30Z" }
+  ) {
+    id
+  }
+
+  user6: createUser(
+    data: { firstName: "Arun", lastName: "Bala", githubHandle: "ghi@github" }
+  ) {
+    id
+  }
+
+  org6: createOrganization(
+    data: { orgName: "Microsoft", orgSlug: "microsoft" }
+  ) {
+    id
+  }
+
+  proj6: createProject(
+    data: {
+      projName: "Skype"
+      projSlug: "skype"
+      organization: { connect: { orgSlug: "microsoft" } }
+    }
+  ) {
+    id
+  }
+
+  mentor6: createMentor(
+    data: {
+      user: { connect: { githubHandle: "ghi@github" } }
+      project: { connect: { projSlug: "skype" } }
+    }
+  ) {
+    id
+  }
+  proposal6: createProposal(
+    data: {
+      user: { connect: { githubHandle: "ghi@github" } }
+      project: { connect: { projSlug: "skype" } }
+      isAccepted: false
+      propUrl: "https://www.google.com"
+    }
+  ) {
+    id
+  }
+
+  event6: createEvent(
+    data: { eventDesc: "Hello World 1", date: "2008-12-03T10:15:30Z" }
+  ) {
+    id
+  }
+
+
+     user3:createUser(data: {
+        firstName: "Ram"
+        lastName: "topper"
+        githubHandle: "CPking"
+
+    })
+    {
+        id
+    }
+
+    user4:createUser(data: {
+        firstName: "Chethan"
+        lastName: "Reddy"
+        githubHandle: "Chethan2k1"
+
+    })
+    {
+        id
+    }
+    
+     org3:createOrganization(data: {
+        orgName: "delta19"
+        orgSlug:"DWOC19"
+    })
+    {
+        id
+    }
+
+    org4:createOrganization(data: {
+        orgName: "delta1"
+        orgSlug:"delta1"
+    })
+    {
+        id
+    }
+
+     proj3:createProject(data: {
+        organization: {
+            connect: {
+                orgSlug:"DWOC19"
+            }
+        }
+        projName: "DWOCproj2019"
+        projDesc: "Super Random shit"
+        githubUrl: "CPking.github.com"
+        projSlug: "proj123"
+    })
+    {
+        id
+    }
+
+    proj4:createProject(data: {
+        organization: {
+            connect: {
+                orgSlug:"delta1"
+            }
+        }
+        projName: "DWOCproj"
+        projDesc: "Random shit"
+        githubUrl: "Chethan2k1"
+        projSlug: "DWOCproj"
+    })
+    {
+        id
+    }
+
+     ment3:createMentor(data: {
+        user: {
+            connect:{
+                githubHandle: "CPking"
+            }
+        }
+        project: {
+            connect:{
+                projSlug: "proj123"
+            }
+        }
+    })
+    {
+        id
+    }
+
+     ment4:createMentor(data: {
+        user: {
+            connect:{
+                githubHandle: "Chethan2k1"
+            }
+        }
+        project: {
+            connect:{
+                projSlug: "DWOCproj"
+            }
+        }
+    })
+    {
+        id
+    }
+
+     prop3:createProposal(data: {
+        user: {
+            connect:{
+                githubHandle: "CPking"
+            }
+        }
+        project: {
+            connect:{
+                projSlug: "proj123"
+            }
+        }
+        isAccepted: false
+        propUrl: "therila"
+    })
+    {
+        id
+    }
+
+    prop4:createProposal(data: {
+        user: {
+            connect:{
+                githubHandle: "Chethan2k1"
+            }
+        }
+        project: {
+            connect:{
+                projSlug: "DWOCproj"
+            }
+        }
+        isAccepted: false
+        propUrl: "therila"
+    })
+    {
+        id
+    }
+
+    event3:createEvent(data:{
+        eventDesc:"Summa tough da"
+        date:"2009-10-03T12:15:30Z"
+    }){
+        id
+    }
+    event4:createEvent(data:{
+        eventDesc:"Super tough da"
+        date:"2009-10-03T12:17:30Z"
+    }){
+        id
+    }
+
+
+}
