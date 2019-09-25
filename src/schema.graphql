@@ -1,0 +1,38 @@
+type Query {
+    info: String!
+}
+
+type Mutation {
+    updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+}
+
+enum roles {
+  Developer
+  Mentor
+  Admin
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  role: roles
+  email: String
+  mobileNumber: String
+  githubHandle: String!
+  password: String
+  isVerified: Boolean
+  session: String
+}
+
+input UserUpdateInput {
+  firstName: String
+  lastName: String
+  email: String
+  mobileNumber: String
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  githubHandle: String
+}
