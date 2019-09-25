@@ -1,11 +1,5 @@
 import { authenticate } from '../authentication';
 
-function createNewUser(root, args, context) {
-  return context.prisma.createUser({
-    ...args.data,
-  });
-}
-
 async function updateUser(root, args, context) {
   //check if user has a valid session
   const authRes = await authenticate(context.session, context.id);
@@ -19,6 +13,5 @@ async function updateUser(root, args, context) {
 }
 
 module.exports = {
-  createNewUser,
   updateUser,
 };

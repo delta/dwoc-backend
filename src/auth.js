@@ -10,33 +10,41 @@ passport.use(
       callbackURL: 'http://localhost:4000/home',
     },
     function(accessToken, refreshToken, profile, cb) {
-      return cb(null, profile._json);
+      return cb(null, { profile: profile._json, accessToken: accessToken });
     }
   )
 );
 
 passport.serializeUser(async (user, cb) => {
   //create a new user if user does not exist
-  console.log('AuthUser', user);
-  let findUser = await prisma.users({ where: { githubHandle: user.login } });
+  let findUser = await prisma.users({
+    where: { githubHandle: user.profile.login },
+  });
 
   if (findUser.length == 0 || findUser == null || findUser == undefined) {
-    const name = user.name.split(' ');
+    const name = user.profile.name.split(' ');
     const firstName = name[0];
     const lastName = name.length > 1 ? name[name.length - 1] : ' ';
     let newUser = await prisma.createUser({
       firstName: firstName,
       lastName: lastName,
-      email: user.email,
-      githubHandle: user.login,
+      email: user.profile.email,
+      githubHandle: user.profile.login,
+      session: user.accessToken,
     });
-    console.log('NewUser', newUser);
+    // console.log('NewUser Created successfullt', newUser);
     cb(null, newUser);
+  } else {
+    //if user already exist then update the access token
+    let updatedUser = await prisma.updateUser({
+      data: { session: user.accessToken },
+      where: { githubHandle: user.profile.login },
+    });
+    // console.log('Session update successfully', updatedUser);
+    cb(null, updatedUser);
   }
-
-  cb(null, user);
 });
 
 passport.deserializeUser(function(user, cb) {
-  cb(null, user);
+  cb(null, user.profile);
 });
