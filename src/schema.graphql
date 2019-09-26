@@ -4,6 +4,9 @@ type Query {
 
 type Mutation {
     updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+    createOrganization(data: OrganizationCreateInput!): Organization!
+    updateOrganization(data:OrganizationUpdateInput!,where:OrganizationWhereUniqueInput!):Organization!
+    deleteOrganization(where: OrganizationWhereUniqueInput): Organization!
 }
 
 enum roles {
@@ -35,4 +38,31 @@ input UserUpdateInput {
 input UserWhereUniqueInput {
   id: ID
   githubHandle: String
+}
+
+type Organization  {
+  id: ID!
+  orgName: String!
+  orgSlug: String!
+  orgDesc: String
+  githubUrl: String
+}
+
+input OrganizationCreateInput {
+  id: ID
+  orgName: String!
+  orgSlug: String!
+  orgDesc: String
+  githubUrl: String
+}
+
+
+input OrganizationUpdateInput{
+  orgDesc: String
+}
+
+input OrganizationWhereUniqueInput{
+  id: ID
+  orgSlug: String
+  githubUrl: String
 }

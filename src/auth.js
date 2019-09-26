@@ -64,6 +64,6 @@ passport.serializeUser(async (user: User, cb: (a?: any, b?: any) => any) => {
   }
 });
 
-passport.deserializeUser(function(user, cb) {
+passport.deserializeUser(function (user, cb) {
   cb(null, user.profile);
 });
