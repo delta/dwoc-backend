@@ -1,6 +1,20 @@
-var passport = require('passport');
-var GitHubStrategy = require('passport-github').Strategy;
+/**
+ * @flow
+ */
+
+import passport from 'passport';
+import GitHubStrategy from 'passport-github';
 import { prisma } from './generated/prisma-client';
+
+type User = {
+  profile: {
+    name: string,
+    login: string,
+    email: string,
+    [key: string]: any,
+  },
+  accessToken: string,
+};
 
 passport.use(
   new GitHubStrategy(
@@ -9,13 +23,18 @@ passport.use(
       clientSecret: '8ecf6ade70c3768635f21ef6df9a1170b5d28934',
       callbackURL: 'http://localhost:4000/home',
     },
-    function(accessToken, refreshToken, profile, cb) {
+    function(
+      accessToken: string,
+      refreshToken: string,
+      profile: { _json: {}, _raw: {} },
+      cb
+    ) {
       return cb(null, { profile: profile._json, accessToken: accessToken });
     }
   )
 );
 
-passport.serializeUser(async (user, cb) => {
+passport.serializeUser(async (user: User, cb: (a?: any, b?: any) => any) => {
   //create a new user if user does not exist
   let findUser = await prisma.users({
     where: { githubHandle: user.profile.login },

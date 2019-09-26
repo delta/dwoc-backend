@@ -1,6 +1,16 @@
+/**
+ * @flow
+ */
+
 import { prisma } from './generated/prisma-client';
 
-export async function authenticate(session, id) {
+type Response = {
+  message: string,
+  isAuth: boolean,
+  role?:string
+}
+
+export async function authenticate(session: string, id: string): Promise<Response> {
   const user = await prisma.users({
     where: { id: id },
   });
