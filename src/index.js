@@ -11,13 +11,23 @@ import bodyParser from 'body-parser';
 
 require('./auth.js');
 
+type Request = {
+  request: {
+    headers: {
+      session: string,
+      id: string,
+      [key: string]: any,
+    },
+  },
+};
+
 const server = new GraphQLServer({
   typeDefs: './src/schema.graphql',
   resolvers,
 
-  context: req => {
-    const session = req.request.headers.session;
-    const id = req.request.headers.id;
+  context: (req: Request) => {
+    const session: string = req.request.headers.session;
+    const id: string = req.request.headers.id;
     return {
       session,
       id,

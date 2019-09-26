@@ -1,4 +1,8 @@
-function info() {
+/**
+ * @flow
+ */
+
+function info(): string {
   return 'Welcome to DWOC';
 }
 
