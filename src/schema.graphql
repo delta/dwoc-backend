@@ -1,15 +1,1059 @@
 type Query {
-    info: String!
-    organizations(where: OrganizationWhereInput): [Organization]!
+  info: String!
+  projects(where: ProjectWhereInput): [Project]!
+  organizations(where: OrganizationWhereInput): [Organization]!
+  mentors(where: MentorWhereInput): [Mentor]!
+  proposals(where: ProposalWhereInput): [Proposal]!
 }
 
 type Mutation {
-    updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
-    createOrganization(data: OrganizationCreateInput!): Organization!
-    updateOrganization(data:OrganizationUpdateInput!,where:OrganizationWhereUniqueInput!):Organization!
-    deleteOrganization(where: OrganizationWhereUniqueInput): Organization!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+  createProject(data: ProjectCreateInput!): Project!
+  updateProject(
+    data: ProjectUpdateInput!
+    where: ProjectWhereUniqueInput!
+  ): Project
+  deleteProject(where: ProjectWhereUniqueInput!): Project
+  createProposal(data: ProposalCreateInput!): Proposal!
+  updateProposal(
+    data: ProposalUpdateInput!
+    where: ProposalWhereUniqueInput!
+  ): Proposal
+  deleteProposal(where: ProposalWhereUniqueInput!): Proposal
+  createOrganization(data: OrganizationCreateInput!): Organization!
+  updateOrganization(
+    data: OrganizationUpdateInput!
+    where: OrganizationWhereUniqueInput!
+  ): Organization!
+  deleteOrganization(where: OrganizationWhereUniqueInput): Organization!
+  updateMentor(data: MentorUpdateInput!, where: MentorWhereUniqueInput!): Mentor
+  createMentor(data: MentorCreateInput!): Mentor!
+  deleteMentor(where: MentorWhereUniqueInput!): Mentor
+}
+type AggregateEvent {
+  count: Int!
 }
 
+type AggregateMentor {
+  count: Int!
+}
+
+type AggregateOrganization {
+  count: Int!
+}
+
+type AggregateProject {
+  count: Int!
+}
+
+type AggregateProposal {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type BatchPayload {
+  # The number of nodes that have been affected by the Batch operation.
+  count: Long!
+}
+
+scalar DateTime
+
+type Event implements Node {
+  id: ID!
+  date: DateTime!
+  eventDesc: String!
+}
+
+# A connection to a list of items.
+type EventConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [EventEdge]!
+  aggregate: AggregateEvent!
+}
+
+input EventCreateInput {
+  id: ID
+  date: DateTime!
+  eventDesc: String!
+}
+
+# An edge in a connection.
+type EventEdge {
+  # The item at the end of the edge.
+  node: Event!
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+enum EventOrderByInput {
+  id_ASC
+  id_DESC
+  date_ASC
+  date_DESC
+  eventDesc_ASC
+  eventDesc_DESC
+}
+
+type EventPreviousValues {
+  id: ID!
+  date: DateTime!
+  eventDesc: String!
+}
+
+type EventSubscriptionPayload {
+  mutation: MutationType!
+  node: Event
+  updatedFields: [String!]
+  previousValues: EventPreviousValues
+}
+
+input EventSubscriptionWhereInput {
+  # Logical AND on all given filters.
+  AND: [EventSubscriptionWhereInput!]
+  # Logical OR on all given filters.
+  OR: [EventSubscriptionWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [EventSubscriptionWhereInput!]
+  # The subscription event gets dispatched when it's listed in mutation_in
+  mutation_in: [MutationType!]
+  # The subscription event gets only dispatched when one of the updated fields names is included in this list
+  updatedFields_contains: String
+  # The subscription event gets only dispatched when all of the field names included in this list have been updated
+  updatedFields_contains_every: [String!]
+  # The subscription event gets only dispatched when some of the field names included in this list have been updated
+  updatedFields_contains_some: [String!]
+  node: EventWhereInput
+}
+
+input EventUpdateInput {
+  date: DateTime
+  eventDesc: String
+}
+
+input EventUpdateManyMutationInput {
+  date: DateTime
+  eventDesc: String
+}
+
+input EventWhereInput {
+  # Logical AND on all given filters.
+  AND: [EventWhereInput!]
+  # Logical OR on all given filters.
+  OR: [EventWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [EventWhereInput!]
+  id: ID
+  # All values that are not equal to given value.
+  id_not: ID
+  # All values that are contained in given list.
+  id_in: [ID!]
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+  # All values less than the given value.
+  id_lt: ID
+  # All values less than or equal the given value.
+  id_lte: ID
+  # All values greater than the given value.
+  id_gt: ID
+  # All values greater than or equal the given value.
+  id_gte: ID
+  # All values containing the given string.
+  id_contains: ID
+  # All values not containing the given string.
+  id_not_contains: ID
+  # All values starting with the given string.
+  id_starts_with: ID
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+  # All values ending with the given string.
+  id_ends_with: ID
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  date: DateTime
+  # All values that are not equal to given value.
+  date_not: DateTime
+  # All values that are contained in given list.
+  date_in: [DateTime!]
+  # All values that are not contained in given list.
+  date_not_in: [DateTime!]
+  # All values less than the given value.
+  date_lt: DateTime
+  # All values less than or equal the given value.
+  date_lte: DateTime
+  # All values greater than the given value.
+  date_gt: DateTime
+  # All values greater than or equal the given value.
+  date_gte: DateTime
+  eventDesc: String
+  # All values that are not equal to given value.
+  eventDesc_not: String
+  # All values that are contained in given list.
+  eventDesc_in: [String!]
+  # All values that are not contained in given list.
+  eventDesc_not_in: [String!]
+  # All values less than the given value.
+  eventDesc_lt: String
+  # All values less than or equal the given value.
+  eventDesc_lte: String
+  # All values greater than the given value.
+  eventDesc_gt: String
+  # All values greater than or equal the given value.
+  eventDesc_gte: String
+  # All values containing the given string.
+  eventDesc_contains: String
+  # All values not containing the given string.
+  eventDesc_not_contains: String
+  # All values starting with the given string.
+  eventDesc_starts_with: String
+  # All values not starting with the given string.
+  eventDesc_not_starts_with: String
+  # All values ending with the given string.
+  eventDesc_ends_with: String
+  # All values not ending with the given string.
+  eventDesc_not_ends_with: String
+}
+
+input EventWhereUniqueInput {
+  id: ID
+}
+
+# The `Long` scalar type represents non-fractional signed whole numeric values.
+# Long can represent values between -(2^63) and 2^63 - 1.
+scalar Long
+
+type Mentor implements Node {
+  id: ID!
+  user: User!
+  project: Project!
+}
+
+# A connection to a list of items.
+type MentorConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [MentorEdge]!
+  aggregate: AggregateMentor!
+}
+
+input MentorCreateInput {
+  id: ID
+  user: UserCreateOneInput!
+  project: ProjectCreateOneInput!
+}
+
+# An edge in a connection.
+type MentorEdge {
+  # The item at the end of the edge.
+  node: Mentor!
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+enum MentorOrderByInput {
+  id_ASC
+  id_DESC
+}
+
+type MentorPreviousValues {
+  id: ID!
+}
+
+type MentorSubscriptionPayload {
+  mutation: MutationType!
+  node: Mentor
+  updatedFields: [String!]
+  previousValues: MentorPreviousValues
+}
+
+input MentorSubscriptionWhereInput {
+  # Logical AND on all given filters.
+  AND: [MentorSubscriptionWhereInput!]
+  # Logical OR on all given filters.
+  OR: [MentorSubscriptionWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [MentorSubscriptionWhereInput!]
+  # The subscription event gets dispatched when it's listed in mutation_in
+  mutation_in: [MutationType!]
+  # The subscription event gets only dispatched when one of the updated fields names is included in this list
+  updatedFields_contains: String
+  # The subscription event gets only dispatched when all of the field names included in this list have been updated
+  updatedFields_contains_every: [String!]
+  # The subscription event gets only dispatched when some of the field names included in this list have been updated
+  updatedFields_contains_some: [String!]
+  node: MentorWhereInput
+}
+
+input MentorUpdateInput {
+  user: UserUpdateOneRequiredInput
+  project: ProjectUpdateOneRequiredInput
+}
+
+input MentorWhereInput {
+  # Logical AND on all given filters.
+  AND: [MentorWhereInput!]
+  # Logical OR on all given filters.
+  OR: [MentorWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [MentorWhereInput!]
+  id: ID
+  # All values that are not equal to given value.
+  id_not: ID
+  # All values that are contained in given list.
+  id_in: [ID!]
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+  # All values less than the given value.
+  id_lt: ID
+  # All values less than or equal the given value.
+  id_lte: ID
+  # All values greater than the given value.
+  id_gt: ID
+  # All values greater than or equal the given value.
+  id_gte: ID
+  # All values containing the given string.
+  id_contains: ID
+  # All values not containing the given string.
+  id_not_contains: ID
+  # All values starting with the given string.
+  id_starts_with: ID
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+  # All values ending with the given string.
+  id_ends_with: ID
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  user: UserWhereInput
+  project: ProjectWhereInput
+}
+
+input MentorWhereUniqueInput {
+  id: ID
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+type Organization implements Node {
+  id: ID!
+  orgName: String!
+  orgSlug: String!
+  orgDesc: String
+  githubUrl: String
+}
+
+# A connection to a list of items.
+type OrganizationConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [OrganizationEdge]!
+  aggregate: AggregateOrganization!
+}
+
+input OrganizationCreateInput {
+  id: ID
+  orgName: String!
+  orgSlug: String!
+  orgDesc: String
+  githubUrl: String
+}
+
+input OrganizationCreateOneInput {
+  create: OrganizationCreateInput
+  connect: OrganizationWhereUniqueInput
+}
+
+# An edge in a connection.
+type OrganizationEdge {
+  # The item at the end of the edge.
+  node: Organization!
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+enum OrganizationOrderByInput {
+  id_ASC
+  id_DESC
+  orgName_ASC
+  orgName_DESC
+  orgSlug_ASC
+  orgSlug_DESC
+  orgDesc_ASC
+  orgDesc_DESC
+  githubUrl_ASC
+  githubUrl_DESC
+}
+
+type OrganizationPreviousValues {
+  id: ID!
+  orgName: String!
+  orgSlug: String!
+  orgDesc: String
+  githubUrl: String
+}
+
+type OrganizationSubscriptionPayload {
+  mutation: MutationType!
+  node: Organization
+  updatedFields: [String!]
+  previousValues: OrganizationPreviousValues
+}
+
+input OrganizationSubscriptionWhereInput {
+  # Logical AND on all given filters.
+  AND: [OrganizationSubscriptionWhereInput!]
+  # Logical OR on all given filters.
+  OR: [OrganizationSubscriptionWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [OrganizationSubscriptionWhereInput!]
+  # The subscription event gets dispatched when it's listed in mutation_in
+  mutation_in: [MutationType!]
+  # The subscription event gets only dispatched when one of the updated fields names is included in this list
+  updatedFields_contains: String
+  # The subscription event gets only dispatched when all of the field names included in this list have been updated
+  updatedFields_contains_every: [String!]
+  # The subscription event gets only dispatched when some of the field names included in this list have been updated
+  updatedFields_contains_some: [String!]
+  node: OrganizationWhereInput
+}
+
+input OrganizationUpdateDataInput {
+  orgName: String
+  orgSlug: String
+  orgDesc: String
+  githubUrl: String
+}
+
+input OrganizationUpdateInput {
+  orgName: String
+  orgSlug: String
+  orgDesc: String
+  githubUrl: String
+}
+
+input OrganizationUpdateManyMutationInput {
+  orgName: String
+  orgSlug: String
+  orgDesc: String
+  githubUrl: String
+}
+
+input OrganizationUpdateOneRequiredInput {
+  create: OrganizationCreateInput
+  connect: OrganizationWhereUniqueInput
+  update: OrganizationUpdateDataInput
+  upsert: OrganizationUpsertNestedInput
+}
+
+input OrganizationUpsertNestedInput {
+  update: OrganizationUpdateDataInput!
+  create: OrganizationCreateInput!
+}
+
+input OrganizationWhereInput {
+  # Logical AND on all given filters.
+  AND: [OrganizationWhereInput!]
+  # Logical OR on all given filters.
+  OR: [OrganizationWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [OrganizationWhereInput!]
+  id: ID
+  # All values that are not equal to given value.
+  id_not: ID
+  # All values that are contained in given list.
+  id_in: [ID!]
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+  # All values less than the given value.
+  id_lt: ID
+  # All values less than or equal the given value.
+  id_lte: ID
+  # All values greater than the given value.
+  id_gt: ID
+  # All values greater than or equal the given value.
+  id_gte: ID
+  # All values containing the given string.
+  id_contains: ID
+  # All values not containing the given string.
+  id_not_contains: ID
+  # All values starting with the given string.
+  id_starts_with: ID
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+  # All values ending with the given string.
+  id_ends_with: ID
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  orgName: String
+  # All values that are not equal to given value.
+  orgName_not: String
+  # All values that are contained in given list.
+  orgName_in: [String!]
+  # All values that are not contained in given list.
+  orgName_not_in: [String!]
+  # All values less than the given value.
+  orgName_lt: String
+  # All values less than or equal the given value.
+  orgName_lte: String
+  # All values greater than the given value.
+  orgName_gt: String
+  # All values greater than or equal the given value.
+  orgName_gte: String
+  # All values containing the given string.
+  orgName_contains: String
+  # All values not containing the given string.
+  orgName_not_contains: String
+  # All values starting with the given string.
+  orgName_starts_with: String
+  # All values not starting with the given string.
+  orgName_not_starts_with: String
+  # All values ending with the given string.
+  orgName_ends_with: String
+  # All values not ending with the given string.
+  orgName_not_ends_with: String
+  orgSlug: String
+  # All values that are not equal to given value.
+  orgSlug_not: String
+  # All values that are contained in given list.
+  orgSlug_in: [String!]
+  # All values that are not contained in given list.
+  orgSlug_not_in: [String!]
+  # All values less than the given value.
+  orgSlug_lt: String
+  # All values less than or equal the given value.
+  orgSlug_lte: String
+  # All values greater than the given value.
+  orgSlug_gt: String
+  # All values greater than or equal the given value.
+  orgSlug_gte: String
+  # All values containing the given string.
+  orgSlug_contains: String
+  # All values not containing the given string.
+  orgSlug_not_contains: String
+  # All values starting with the given string.
+  orgSlug_starts_with: String
+  # All values not starting with the given string.
+  orgSlug_not_starts_with: String
+  # All values ending with the given string.
+  orgSlug_ends_with: String
+  # All values not ending with the given string.
+  orgSlug_not_ends_with: String
+  orgDesc: String
+  # All values that are not equal to given value.
+  orgDesc_not: String
+  # All values that are contained in given list.
+  orgDesc_in: [String!]
+  # All values that are not contained in given list.
+  orgDesc_not_in: [String!]
+  # All values less than the given value.
+  orgDesc_lt: String
+  # All values less than or equal the given value.
+  orgDesc_lte: String
+  # All values greater than the given value.
+  orgDesc_gt: String
+  # All values greater than or equal the given value.
+  orgDesc_gte: String
+  # All values containing the given string.
+  orgDesc_contains: String
+  # All values not containing the given string.
+  orgDesc_not_contains: String
+  # All values starting with the given string.
+  orgDesc_starts_with: String
+  # All values not starting with the given string.
+  orgDesc_not_starts_with: String
+  # All values ending with the given string.
+  orgDesc_ends_with: String
+  # All values not ending with the given string.
+  orgDesc_not_ends_with: String
+  githubUrl: String
+  # All values that are not equal to given value.
+  githubUrl_not: String
+  # All values that are contained in given list.
+  githubUrl_in: [String!]
+  # All values that are not contained in given list.
+  githubUrl_not_in: [String!]
+  # All values less than the given value.
+  githubUrl_lt: String
+  # All values less than or equal the given value.
+  githubUrl_lte: String
+  # All values greater than the given value.
+  githubUrl_gt: String
+  # All values greater than or equal the given value.
+  githubUrl_gte: String
+  # All values containing the given string.
+  githubUrl_contains: String
+  # All values not containing the given string.
+  githubUrl_not_contains: String
+  # All values starting with the given string.
+  githubUrl_starts_with: String
+  # All values not starting with the given string.
+  githubUrl_not_starts_with: String
+  # All values ending with the given string.
+  githubUrl_ends_with: String
+  # All values not ending with the given string.
+  githubUrl_not_ends_with: String
+}
+
+input OrganizationWhereUniqueInput {
+  id: ID
+  orgSlug: String
+  githubUrl: String
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+type Project implements Node {
+  id: ID!
+  organization: Organization!
+  projName: String!
+  projSlug: String!
+  projDesc: String
+  githubUrl: String
+}
+
+# A connection to a list of items.
+type ProjectConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [ProjectEdge]!
+  aggregate: AggregateProject!
+}
+
+input ProjectCreateInput {
+  id: ID
+  projName: String!
+  projSlug: String!
+  projDesc: String
+  githubUrl: String
+  organization: OrganizationCreateOneInput!
+}
+
+input ProjectCreateOneInput {
+  create: ProjectCreateInput
+  connect: ProjectWhereUniqueInput
+}
+
+# An edge in a connection.
+type ProjectEdge {
+  # The item at the end of the edge.
+  node: Project!
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+enum ProjectOrderByInput {
+  id_ASC
+  id_DESC
+  projName_ASC
+  projName_DESC
+  projSlug_ASC
+  projSlug_DESC
+  projDesc_ASC
+  projDesc_DESC
+  githubUrl_ASC
+  githubUrl_DESC
+}
+
+type ProjectPreviousValues {
+  id: ID!
+  projName: String!
+  projSlug: String!
+  projDesc: String
+  githubUrl: String
+}
+
+type ProjectSubscriptionPayload {
+  mutation: MutationType!
+  node: Project
+  updatedFields: [String!]
+  previousValues: ProjectPreviousValues
+}
+
+input ProjectSubscriptionWhereInput {
+  # Logical AND on all given filters.
+  AND: [ProjectSubscriptionWhereInput!]
+  # Logical OR on all given filters.
+  OR: [ProjectSubscriptionWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [ProjectSubscriptionWhereInput!]
+  # The subscription event gets dispatched when it's listed in mutation_in
+  mutation_in: [MutationType!]
+  # The subscription event gets only dispatched when one of the updated fields names is included in this list
+  updatedFields_contains: String
+  # The subscription event gets only dispatched when all of the field names included in this list have been updated
+  updatedFields_contains_every: [String!]
+  # The subscription event gets only dispatched when some of the field names included in this list have been updated
+  updatedFields_contains_some: [String!]
+  node: ProjectWhereInput
+}
+
+input ProjectUpdateDataInput {
+  projName: String
+  projSlug: String
+  projDesc: String
+  githubUrl: String
+  organization: OrganizationUpdateOneRequiredInput
+}
+
+input ProjectUpdateInput {
+  projName: String
+  projSlug: String
+  projDesc: String
+  githubUrl: String
+  organization: OrganizationUpdateOneRequiredInput
+}
+
+input ProjectUpdateManyMutationInput {
+  projName: String
+  projSlug: String
+  projDesc: String
+  githubUrl: String
+}
+
+input ProjectUpdateOneRequiredInput {
+  create: ProjectCreateInput
+  connect: ProjectWhereUniqueInput
+  update: ProjectUpdateDataInput
+  upsert: ProjectUpsertNestedInput
+}
+
+input ProjectUpsertNestedInput {
+  update: ProjectUpdateDataInput!
+  create: ProjectCreateInput!
+}
+
+input ProjectWhereInput {
+  # Logical AND on all given filters.
+  AND: [ProjectWhereInput!]
+  # Logical OR on all given filters.
+  OR: [ProjectWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [ProjectWhereInput!]
+  id: ID
+  # All values that are not equal to given value.
+  id_not: ID
+  # All values that are contained in given list.
+  id_in: [ID!]
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+  # All values less than the given value.
+  id_lt: ID
+  # All values less than or equal the given value.
+  id_lte: ID
+  # All values greater than the given value.
+  id_gt: ID
+  # All values greater than or equal the given value.
+  id_gte: ID
+  # All values containing the given string.
+  id_contains: ID
+  # All values not containing the given string.
+  id_not_contains: ID
+  # All values starting with the given string.
+  id_starts_with: ID
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+  # All values ending with the given string.
+  id_ends_with: ID
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  projName: String
+  # All values that are not equal to given value.
+  projName_not: String
+  # All values that are contained in given list.
+  projName_in: [String!]
+  # All values that are not contained in given list.
+  projName_not_in: [String!]
+  # All values less than the given value.
+  projName_lt: String
+  # All values less than or equal the given value.
+  projName_lte: String
+  # All values greater than the given value.
+  projName_gt: String
+  # All values greater than or equal the given value.
+  projName_gte: String
+  # All values containing the given string.
+  projName_contains: String
+  # All values not containing the given string.
+  projName_not_contains: String
+  # All values starting with the given string.
+  projName_starts_with: String
+  # All values not starting with the given string.
+  projName_not_starts_with: String
+  # All values ending with the given string.
+  projName_ends_with: String
+  # All values not ending with the given string.
+  projName_not_ends_with: String
+  projSlug: String
+  # All values that are not equal to given value.
+  projSlug_not: String
+  # All values that are contained in given list.
+  projSlug_in: [String!]
+  # All values that are not contained in given list.
+  projSlug_not_in: [String!]
+  # All values less than the given value.
+  projSlug_lt: String
+  # All values less than or equal the given value.
+  projSlug_lte: String
+  # All values greater than the given value.
+  projSlug_gt: String
+  # All values greater than or equal the given value.
+  projSlug_gte: String
+  # All values containing the given string.
+  projSlug_contains: String
+  # All values not containing the given string.
+  projSlug_not_contains: String
+  # All values starting with the given string.
+  projSlug_starts_with: String
+  # All values not starting with the given string.
+  projSlug_not_starts_with: String
+  # All values ending with the given string.
+  projSlug_ends_with: String
+  # All values not ending with the given string.
+  projSlug_not_ends_with: String
+  projDesc: String
+  # All values that are not equal to given value.
+  projDesc_not: String
+  # All values that are contained in given list.
+  projDesc_in: [String!]
+  # All values that are not contained in given list.
+  projDesc_not_in: [String!]
+  # All values less than the given value.
+  projDesc_lt: String
+  # All values less than or equal the given value.
+  projDesc_lte: String
+  # All values greater than the given value.
+  projDesc_gt: String
+  # All values greater than or equal the given value.
+  projDesc_gte: String
+  # All values containing the given string.
+  projDesc_contains: String
+  # All values not containing the given string.
+  projDesc_not_contains: String
+  # All values starting with the given string.
+  projDesc_starts_with: String
+  # All values not starting with the given string.
+  projDesc_not_starts_with: String
+  # All values ending with the given string.
+  projDesc_ends_with: String
+  # All values not ending with the given string.
+  projDesc_not_ends_with: String
+  githubUrl: String
+  # All values that are not equal to given value.
+  githubUrl_not: String
+  # All values that are contained in given list.
+  githubUrl_in: [String!]
+  # All values that are not contained in given list.
+  githubUrl_not_in: [String!]
+  # All values less than the given value.
+  githubUrl_lt: String
+  # All values less than or equal the given value.
+  githubUrl_lte: String
+  # All values greater than the given value.
+  githubUrl_gt: String
+  # All values greater than or equal the given value.
+  githubUrl_gte: String
+  # All values containing the given string.
+  githubUrl_contains: String
+  # All values not containing the given string.
+  githubUrl_not_contains: String
+  # All values starting with the given string.
+  githubUrl_starts_with: String
+  # All values not starting with the given string.
+  githubUrl_not_starts_with: String
+  # All values ending with the given string.
+  githubUrl_ends_with: String
+  # All values not ending with the given string.
+  githubUrl_not_ends_with: String
+  organization: OrganizationWhereInput
+}
+
+input ProjectWhereUniqueInput {
+  id: ID
+  projSlug: String
+}
+
+type Proposal implements Node {
+  id: ID!
+  user: User!
+  project: Project!
+  isAccepted: Boolean!
+  propUrl: String!
+}
+
+# A connection to a list of items.
+type ProposalConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [ProposalEdge]!
+  aggregate: AggregateProposal!
+}
+
+input ProposalCreateInput {
+  id: ID
+  isAccepted: Boolean
+  propUrl: String!
+  user: UserCreateOneInput!
+  project: ProjectCreateOneInput!
+}
+
+# An edge in a connection.
+type ProposalEdge {
+  # The item at the end of the edge.
+  node: Proposal!
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+enum ProposalOrderByInput {
+  id_ASC
+  id_DESC
+  isAccepted_ASC
+  isAccepted_DESC
+  propUrl_ASC
+  propUrl_DESC
+}
+
+type ProposalPreviousValues {
+  id: ID!
+  isAccepted: Boolean!
+  propUrl: String!
+}
+
+type ProposalSubscriptionPayload {
+  mutation: MutationType!
+  node: Proposal
+  updatedFields: [String!]
+  previousValues: ProposalPreviousValues
+}
+
+input ProposalSubscriptionWhereInput {
+  # Logical AND on all given filters.
+  AND: [ProposalSubscriptionWhereInput!]
+  # Logical OR on all given filters.
+  OR: [ProposalSubscriptionWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [ProposalSubscriptionWhereInput!]
+  # The subscription event gets dispatched when it's listed in mutation_in
+  mutation_in: [MutationType!]
+  # The subscription event gets only dispatched when one of the updated fields names is included in this list
+  updatedFields_contains: String
+  # The subscription event gets only dispatched when all of the field names included in this list have been updated
+  updatedFields_contains_every: [String!]
+  # The subscription event gets only dispatched when some of the field names included in this list have been updated
+  updatedFields_contains_some: [String!]
+  node: ProposalWhereInput
+}
+
+input ProposalUpdateInput {
+  isAccepted: Boolean
+  propUrl: String
+  user: UserUpdateOneRequiredInput
+  project: ProjectUpdateOneRequiredInput
+}
+
+input ProposalUpdateManyMutationInput {
+  isAccepted: Boolean
+  propUrl: String
+}
+
+input ProposalWhereInput {
+  # Logical AND on all given filters.
+  AND: [ProposalWhereInput!]
+  # Logical OR on all given filters.
+  OR: [ProposalWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [ProposalWhereInput!]
+  id: ID
+  # All values that are not equal to given value.
+  id_not: ID
+  # All values that are contained in given list.
+  id_in: [ID!]
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+  # All values less than the given value.
+  id_lt: ID
+  # All values less than or equal the given value.
+  id_lte: ID
+  # All values greater than the given value.
+  id_gt: ID
+  # All values greater than or equal the given value.
+  id_gte: ID
+  # All values containing the given string.
+  id_contains: ID
+  # All values not containing the given string.
+  id_not_contains: ID
+  # All values starting with the given string.
+  id_starts_with: ID
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+  # All values ending with the given string.
+  id_ends_with: ID
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  isAccepted: Boolean
+  # All values that are not equal to given value.
+  isAccepted_not: Boolean
+  propUrl: String
+  # All values that are not equal to given value.
+  propUrl_not: String
+  # All values that are contained in given list.
+  propUrl_in: [String!]
+  # All values that are not contained in given list.
+  propUrl_not_in: [String!]
+  # All values less than the given value.
+  propUrl_lt: String
+  # All values less than or equal the given value.
+  propUrl_lte: String
+  # All values greater than the given value.
+  propUrl_gt: String
+  # All values greater than or equal the given value.
+  propUrl_gte: String
+  # All values containing the given string.
+  propUrl_contains: String
+  # All values not containing the given string.
+  propUrl_not_contains: String
+  # All values starting with the given string.
+  propUrl_starts_with: String
+  # All values not starting with the given string.
+  propUrl_not_starts_with: String
+  # All values ending with the given string.
+  propUrl_ends_with: String
+  # All values not ending with the given string.
+  propUrl_not_ends_with: String
+  user: UserWhereInput
+  project: ProjectWhereInput
+}
+
+input ProposalWhereUniqueInput {
+  id: ID
+}
 
 enum roles {
   Developer
@@ -17,7 +1061,18 @@ enum roles {
   Admin
 }
 
-type User {
+type Subscription {
+  mentor(where: MentorSubscriptionWhereInput): MentorSubscriptionPayload
+  proposal(where: ProposalSubscriptionWhereInput): ProposalSubscriptionPayload
+  event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
+  organization(
+    where: OrganizationSubscriptionWhereInput
+  ): OrganizationSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  project(where: ProjectSubscriptionWhereInput): ProjectSubscriptionPayload
+}
+
+type User implements Node {
   id: ID!
   firstName: String!
   lastName: String!
@@ -30,118 +1085,388 @@ type User {
   session: String
 }
 
+# A connection to a list of items.
+type UserConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  id: ID
+  firstName: String!
+  lastName: String!
+  role: roles
+  email: String
+  mobileNumber: String
+  githubHandle: String!
+  password: String
+  isVerified: Boolean
+  session: String
+}
+
+input UserCreateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+}
+
+# An edge in a connection.
+type UserEdge {
+  # The item at the end of the edge.
+  node: User!
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  firstName_ASC
+  firstName_DESC
+  lastName_ASC
+  lastName_DESC
+  role_ASC
+  role_DESC
+  email_ASC
+  email_DESC
+  mobileNumber_ASC
+  mobileNumber_DESC
+  githubHandle_ASC
+  githubHandle_DESC
+  password_ASC
+  password_DESC
+  isVerified_ASC
+  isVerified_DESC
+  session_ASC
+  session_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  role: roles
+  email: String
+  mobileNumber: String
+  githubHandle: String!
+  password: String
+  isVerified: Boolean
+  session: String
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  # Logical AND on all given filters.
+  AND: [UserSubscriptionWhereInput!]
+  # Logical OR on all given filters.
+  OR: [UserSubscriptionWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [UserSubscriptionWhereInput!]
+  # The subscription event gets dispatched when it's listed in mutation_in
+  mutation_in: [MutationType!]
+  # The subscription event gets only dispatched when one of the updated fields names is included in this list
+  updatedFields_contains: String
+  # The subscription event gets only dispatched when all of the field names included in this list have been updated
+  updatedFields_contains_every: [String!]
+  # The subscription event gets only dispatched when some of the field names included in this list have been updated
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+}
+
+input UserUpdateDataInput {
+  firstName: String
+  lastName: String
+  role: roles
+  email: String
+  mobileNumber: String
+  githubHandle: String
+  password: String
+  isVerified: Boolean
+  session: String
+}
+
 input UserUpdateInput {
   firstName: String
   lastName: String
+  role: roles
   email: String
   mobileNumber: String
+  githubHandle: String
+  password: String
+  isVerified: Boolean
+  session: String
+}
+
+input UserUpdateManyMutationInput {
+  firstName: String
+  lastName: String
+  role: roles
+  email: String
+  mobileNumber: String
+  githubHandle: String
+  password: String
+  isVerified: Boolean
+  session: String
+}
+
+input UserUpdateOneRequiredInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+}
+
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
+}
+
+input UserWhereInput {
+  # Logical AND on all given filters.
+  AND: [UserWhereInput!]
+  # Logical OR on all given filters.
+  OR: [UserWhereInput!]
+  # Logical NOT on all given filters combined by AND.
+  NOT: [UserWhereInput!]
+  id: ID
+  # All values that are not equal to given value.
+  id_not: ID
+  # All values that are contained in given list.
+  id_in: [ID!]
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+  # All values less than the given value.
+  id_lt: ID
+  # All values less than or equal the given value.
+  id_lte: ID
+  # All values greater than the given value.
+  id_gt: ID
+  # All values greater than or equal the given value.
+  id_gte: ID
+  # All values containing the given string.
+  id_contains: ID
+  # All values not containing the given string.
+  id_not_contains: ID
+  # All values starting with the given string.
+  id_starts_with: ID
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+  # All values ending with the given string.
+  id_ends_with: ID
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  firstName: String
+  # All values that are not equal to given value.
+  firstName_not: String
+  # All values that are contained in given list.
+  firstName_in: [String!]
+  # All values that are not contained in given list.
+  firstName_not_in: [String!]
+  # All values less than the given value.
+  firstName_lt: String
+  # All values less than or equal the given value.
+  firstName_lte: String
+  # All values greater than the given value.
+  firstName_gt: String
+  # All values greater than or equal the given value.
+  firstName_gte: String
+  # All values containing the given string.
+  firstName_contains: String
+  # All values not containing the given string.
+  firstName_not_contains: String
+  # All values starting with the given string.
+  firstName_starts_with: String
+  # All values not starting with the given string.
+  firstName_not_starts_with: String
+  # All values ending with the given string.
+  firstName_ends_with: String
+  # All values not ending with the given string.
+  firstName_not_ends_with: String
+  lastName: String
+  # All values that are not equal to given value.
+  lastName_not: String
+  # All values that are contained in given list.
+  lastName_in: [String!]
+  # All values that are not contained in given list.
+  lastName_not_in: [String!]
+  # All values less than the given value.
+  lastName_lt: String
+  # All values less than or equal the given value.
+  lastName_lte: String
+  # All values greater than the given value.
+  lastName_gt: String
+  # All values greater than or equal the given value.
+  lastName_gte: String
+  # All values containing the given string.
+  lastName_contains: String
+  # All values not containing the given string.
+  lastName_not_contains: String
+  # All values starting with the given string.
+  lastName_starts_with: String
+  # All values not starting with the given string.
+  lastName_not_starts_with: String
+  # All values ending with the given string.
+  lastName_ends_with: String
+  # All values not ending with the given string.
+  lastName_not_ends_with: String
+  role: roles
+  # All values that are not equal to given value.
+  role_not: roles
+  # All values that are contained in given list.
+  role_in: [roles!]
+  # All values that are not contained in given list.
+  role_not_in: [roles!]
+  email: String
+  # All values that are not equal to given value.
+  email_not: String
+  # All values that are contained in given list.
+  email_in: [String!]
+  # All values that are not contained in given list.
+  email_not_in: [String!]
+  # All values less than the given value.
+  email_lt: String
+  # All values less than or equal the given value.
+  email_lte: String
+  # All values greater than the given value.
+  email_gt: String
+  # All values greater than or equal the given value.
+  email_gte: String
+  # All values containing the given string.
+  email_contains: String
+  # All values not containing the given string.
+  email_not_contains: String
+  # All values starting with the given string.
+  email_starts_with: String
+  # All values not starting with the given string.
+  email_not_starts_with: String
+  # All values ending with the given string.
+  email_ends_with: String
+  # All values not ending with the given string.
+  email_not_ends_with: String
+  mobileNumber: String
+  # All values that are not equal to given value.
+  mobileNumber_not: String
+  # All values that are contained in given list.
+  mobileNumber_in: [String!]
+  # All values that are not contained in given list.
+  mobileNumber_not_in: [String!]
+  # All values less than the given value.
+  mobileNumber_lt: String
+  # All values less than or equal the given value.
+  mobileNumber_lte: String
+  # All values greater than the given value.
+  mobileNumber_gt: String
+  # All values greater than or equal the given value.
+  mobileNumber_gte: String
+  # All values containing the given string.
+  mobileNumber_contains: String
+  # All values not containing the given string.
+  mobileNumber_not_contains: String
+  # All values starting with the given string.
+  mobileNumber_starts_with: String
+  # All values not starting with the given string.
+  mobileNumber_not_starts_with: String
+  # All values ending with the given string.
+  mobileNumber_ends_with: String
+  # All values not ending with the given string.
+  mobileNumber_not_ends_with: String
+  githubHandle: String
+  # All values that are not equal to given value.
+  githubHandle_not: String
+  # All values that are contained in given list.
+  githubHandle_in: [String!]
+  # All values that are not contained in given list.
+  githubHandle_not_in: [String!]
+  # All values less than the given value.
+  githubHandle_lt: String
+  # All values less than or equal the given value.
+  githubHandle_lte: String
+  # All values greater than the given value.
+  githubHandle_gt: String
+  # All values greater than or equal the given value.
+  githubHandle_gte: String
+  # All values containing the given string.
+  githubHandle_contains: String
+  # All values not containing the given string.
+  githubHandle_not_contains: String
+  # All values starting with the given string.
+  githubHandle_starts_with: String
+  # All values not starting with the given string.
+  githubHandle_not_starts_with: String
+  # All values ending with the given string.
+  githubHandle_ends_with: String
+  # All values not ending with the given string.
+  githubHandle_not_ends_with: String
+  password: String
+  # All values that are not equal to given value.
+  password_not: String
+  # All values that are contained in given list.
+  password_in: [String!]
+  # All values that are not contained in given list.
+  password_not_in: [String!]
+  # All values less than the given value.
+  password_lt: String
+  # All values less than or equal the given value.
+  password_lte: String
+  # All values greater than the given value.
+  password_gt: String
+  # All values greater than or equal the given value.
+  password_gte: String
+  # All values containing the given string.
+  password_contains: String
+  # All values not containing the given string.
+  password_not_contains: String
+  # All values starting with the given string.
+  password_starts_with: String
+  # All values not starting with the given string.
+  password_not_starts_with: String
+  # All values ending with the given string.
+  password_ends_with: String
+  # All values not ending with the given string.
+  password_not_ends_with: String
+  isVerified: Boolean
+  # All values that are not equal to given value.
+  isVerified_not: Boolean
+  session: String
+  # All values that are not equal to given value.
+  session_not: String
+  # All values that are contained in given list.
+  session_in: [String!]
+  # All values that are not contained in given list.
+  session_not_in: [String!]
+  # All values less than the given value.
+  session_lt: String
+  # All values less than or equal the given value.
+  session_lte: String
+  # All values greater than the given value.
+  session_gt: String
+  # All values greater than or equal the given value.
+  session_gte: String
+  # All values containing the given string.
+  session_contains: String
+  # All values not containing the given string.
+  session_not_contains: String
+  # All values starting with the given string.
+  session_starts_with: String
+  # All values not starting with the given string.
+  session_not_starts_with: String
+  # All values ending with the given string.
+  session_ends_with: String
+  # All values not ending with the given string.
+  session_not_ends_with: String
 }
 
 input UserWhereUniqueInput {
   id: ID
+  email: String
+  mobileNumber: String
   githubHandle: String
-}
-
-type Organization  {
-  id: ID!
-  orgName: String!
-  orgSlug: String!
-  orgDesc: String
-  githubUrl: String
-}
-
-
-input OrganizationCreateInput {
-  id: ID
-  orgName: String!
-  orgSlug: String!
-  orgDesc: String
-  githubUrl: String
-}
-
-
-input OrganizationUpdateInput{
-  orgDesc: String
-}
-
-input OrganizationWhereUniqueInput{
-  id: ID
-  orgSlug: String
-  githubUrl: String
-}
-
-input OrganizationWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  orgName: String
-  orgName_not: String
-  orgName_in: [String!]
-  orgName_not_in: [String!]
-  orgName_lt: String
-  orgName_lte: String
-  orgName_gt: String
-  orgName_gte: String
-  orgName_contains: String
-  orgName_not_contains: String
-  orgName_starts_with: String
-  orgName_not_starts_with: String
-  orgName_ends_with: String
-  orgName_not_ends_with: String
-  orgSlug: String
-  orgSlug_not: String
-  orgSlug_in: [String!]
-  orgSlug_not_in: [String!]
-  orgSlug_lt: String
-  orgSlug_lte: String
-  orgSlug_gt: String
-  orgSlug_gte: String
-  orgSlug_contains: String
-  orgSlug_not_contains: String
-  orgSlug_starts_with: String
-  orgSlug_not_starts_with: String
-  orgSlug_ends_with: String
-  orgSlug_not_ends_with: String
-  orgDesc: String
-  orgDesc_not: String
-  orgDesc_in: [String!]
-  orgDesc_not_in: [String!]
-  orgDesc_lt: String
-  orgDesc_lte: String
-  orgDesc_gt: String
-  orgDesc_gte: String
-  orgDesc_contains: String
-  orgDesc_not_contains: String
-  orgDesc_starts_with: String
-  orgDesc_not_starts_with: String
-  orgDesc_ends_with: String
-  orgDesc_not_ends_with: String
-  githubUrl: String
-  githubUrl_not: String
-  githubUrl_in: [String!]
-  githubUrl_not_in: [String!]
-  githubUrl_lt: String
-  githubUrl_lte: String
-  githubUrl_gt: String
-  githubUrl_gte: String
-  githubUrl_contains: String
-  githubUrl_not_contains: String
-  githubUrl_starts_with: String
-  githubUrl_not_starts_with: String
-  githubUrl_ends_with: String
-  githubUrl_not_ends_with: String
-  AND: [OrganizationWhereInput!]
-  OR: [OrganizationWhereInput!]
-  NOT: [OrganizationWhereInput!]
 }
