@@ -19,22 +19,21 @@ type User {
 
 type Mentor {
   id: ID! @id
-  user: User! @relation(link: INLINE)
-  project: Project! @relation(link: INLINE)
-  
+  user: User! @relation(link: INLINE, onDelete: CASCADE)
+  project: Project! @relation(link: INLINE, onDelete: CASCADE)
 }
 
 type Proposal {
   id: ID! @id
-  user: User! @relation(link: INLINE)
-  project: Project! @relation(link: INLINE)
+  user: User! @relation(link: INLINE, onDelete: CASCADE)
+  project: Project! @relation(link: INLINE, onDelete: CASCADE)
   isAccepted: Boolean! @default(value: false)
   propUrl: String!
 }
 
 type Project {
   id: ID! @id
-  organization: Organization! @relation(link: INLINE)
+  organization: Organization! @relation(link: INLINE, onDelete: CASCADE)
   projName: String!
   projSlug: String! @unique
   projDesc: String
