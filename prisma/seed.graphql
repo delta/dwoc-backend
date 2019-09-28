@@ -9,34 +9,22 @@ mutation {
     id
   }
   user2: createUser(
-    data: {
-      firstName: "agu"
-      lastName: "shamsudeen"
-      githubHandle: "ahmed-20"
-    }
+    data: { firstName: "agu", lastName: "shamsudeen", githubHandle: "ahmed-20" }
   ) {
     id
   }
-  org1: createOrganization(data: {
-    orgName: "delta-NITT"
-    orgSlug: "delta"
-  }) {
+  org1: createOrganization(data: { orgName: "delta-NITT", orgSlug: "delta" }) {
     id
   }
-  org2: createOrganization(data: {
-    orgName: "deltaForce-NITT"
-    orgSlug: "deltanit"
-  }) {
+  org2: createOrganization(
+    data: { orgName: "deltaForce-NITT", orgSlug: "deltanit" }
+  ) {
     id
   }
 
   project1: createProject(
     data: {
-      organization: {
-        connect: {
-          orgSlug: "delta"
-        }
-      }
+      organization: { connect: { orgSlug: "delta" } }
       projName: "dwocproj-NITT"
       projDesc: "therila"
       projSlug: "dwocproj1"
@@ -47,11 +35,7 @@ mutation {
   }
   project2: createProject(
     data: {
-      organization: {
-        connect: {
-          orgSlug: "deltanit"
-        }
-      }
+      organization: { connect: { orgSlug: "deltanit" } }
       projName: "dwocproj-NITT"
       projDesc: "therila"
       projSlug: "dwocproj2"
@@ -62,32 +46,16 @@ mutation {
   }
   mentor1: createMentor(
     data: {
-      user: {
-        connect: {
-          githubHandle: "ahmed-10"
-        }
-      }
-      project: {
-        connect: {
-          projSlug: "dwocproj1"
-        }
-      }
+      user: { connect: { githubHandle: "ahmed-10" } }
+      project: { connect: { projSlug: "dwocproj1" } }
     }
   ) {
     id
   }
   mentor2: createMentor(
     data: {
-      user: {
-        connect: {
-          githubHandle: "ahmed-20"
-        }
-      }
-      project: {
-        connect: {
-          projSlug: "dwocproj2"
-        }
-      }
+      user: { connect: { githubHandle: "ahmed-20" } }
+      project: { connect: { projSlug: "dwocproj2" } }
     }
   ) {
     id
@@ -95,16 +63,8 @@ mutation {
 
   proposal1: createProposal(
     data: {
-      user: {
-        connect: {
-          githubHandle: "ahmed-10"
-        }
-      }
-      project: {
-        connect: {
-          projSlug: "dwocproj1"
-        }
-      }
+      user: { connect: { githubHandle: "ahmed-10" } }
+      project: { connect: { projSlug: "dwocproj1" } }
       isAccepted: false
       propUrl: "something"
     }
@@ -113,16 +73,8 @@ mutation {
   }
   proposal2: createProposal(
     data: {
-      user: {
-        connect: {
-          githubHandle: "ahmed-20"
-        }
-      }
-      project: {
-        connect: {
-          projSlug: "dwocproj2"
-        }
-      }
+      user: { connect: { githubHandle: "ahmed-20" } }
+      project: { connect: { projSlug: "dwocproj2" } }
       isAccepted: false
       propUrl: "therila"
     }
@@ -130,10 +82,7 @@ mutation {
     id
   }
   event1: createEvent(
-    data: {
-      date: "2007-12-03T10:15:30Z"
-      eventDesc: "this is a good event"
-    }
+    data: { date: "2007-12-03T10:15:30Z", eventDesc: "this is a good event" }
   ) {
     id
   }
@@ -146,7 +95,6 @@ mutation {
     id
   }
 
-
   user5: createUser(
     data: {
       firstName: "Pranav"
@@ -157,10 +105,7 @@ mutation {
     id
   }
 
-  org5: createOrganization(data: {
-    orgName: "Mozilla",
-    orgSlug: "mozilla"
-  }) {
+  org5: createOrganization(data: { orgName: "Mozilla", orgSlug: "mozilla" }) {
     id
   }
 
@@ -168,11 +113,7 @@ mutation {
     data: {
       projName: "Firefox"
       projSlug: "firefox"
-      organization: {
-        connect: {
-          orgSlug: "mozilla"
-        }
-      }
+      organization: { connect: { orgSlug: "mozilla" } }
     }
   ) {
     id
@@ -180,32 +121,16 @@ mutation {
 
   mentor5: createMentor(
     data: {
-      user: {
-        connect: {
-          githubHandle: "abcdef@github"
-        }
-      }
-      project: {
-        connect: {
-          projSlug: "firefox"
-        }
-      }
+      user: { connect: { githubHandle: "abcdef@github" } }
+      project: { connect: { projSlug: "firefox" } }
     }
   ) {
     id
   }
   proposal5: createProposal(
     data: {
-      user: {
-        connect: {
-          githubHandle: "abcdef@github"
-        }
-      }
-      project: {
-        connect: {
-          projSlug: "firefox"
-        }
-      }
+      user: { connect: { githubHandle: "abcdef@github" } }
+      project: { connect: { projSlug: "firefox" } }
       isAccepted: false
       propUrl: "https://www.google.com"
     }
@@ -214,29 +139,19 @@ mutation {
   }
 
   event5: createEvent(
-    data: {
-      eventDesc: "Hello World",
-      date: "2007-12-03T10:15:30Z"
-    }
+    data: { eventDesc: "Hello World", date: "2007-12-03T10:15:30Z" }
   ) {
     id
   }
 
   user6: createUser(
-    data: {
-      firstName: "Arun",
-      lastName: "Bala",
-      githubHandle: "ghi@github"
-    }
+    data: { firstName: "Arun", lastName: "Bala", githubHandle: "ghi@github" }
   ) {
     id
   }
 
   org6: createOrganization(
-    data: {
-      orgName: "Microsoft",
-      orgSlug: "microsoft"
-    }
+    data: { orgName: "Microsoft", orgSlug: "microsoft" }
   ) {
     id
   }
@@ -245,11 +160,7 @@ mutation {
     data: {
       projName: "Skype"
       projSlug: "skype"
-      organization: {
-        connect: {
-          orgSlug: "microsoft"
-        }
-      }
+      organization: { connect: { orgSlug: "microsoft" } }
     }
   ) {
     id
@@ -257,32 +168,16 @@ mutation {
 
   mentor6: createMentor(
     data: {
-      user: {
-        connect: {
-          githubHandle: "ghi@github"
-        }
-      }
-      project: {
-        connect: {
-          projSlug: "skype"
-        }
-      }
+      user: { connect: { githubHandle: "ghi@github" } }
+      project: { connect: { projSlug: "skype" } }
     }
   ) {
     id
   }
   proposal6: createProposal(
     data: {
-      user: {
-        connect: {
-          githubHandle: "ghi@github"
-        }
-      }
-      project: {
-        connect: {
-          projSlug: "skype"
-        }
-      }
+      user: { connect: { githubHandle: "ghi@github" } }
+      project: { connect: { projSlug: "skype" } }
       isAccepted: false
       propUrl: "https://www.google.com"
     }
@@ -291,151 +186,107 @@ mutation {
   }
 
   event6: createEvent(
+    data: { eventDesc: "Hello World 1", date: "2008-12-03T10:15:30Z" }
+  ) {
+    id
+  }
+
+  user3: createUser(
+    data: { firstName: "Ram", lastName: "topper", githubHandle: "CPking" }
+  ) {
+    id
+  }
+
+  user4: createUser(
     data: {
-      eventDesc: "Hello World 1",
-      date: "2008-12-03T10:15:30Z"
+      firstName: "Chethan"
+      lastName: "Reddy"
+      githubHandle: "Chethan2k1"
     }
   ) {
     id
   }
 
-
-  user3: createUser(data: {
-    firstName: "Ram"
-    lastName: "topper"
-    githubHandle: "CPking"
-
-  }) {
+  org3: createOrganization(data: { orgName: "delta19", orgSlug: "DWOC19" }) {
     id
   }
 
-  user4: createUser(data: {
-    firstName: "Chethan"
-    lastName: "Reddy"
-    githubHandle: "Chethan2k1"
-
-  }) {
+  org4: createOrganization(data: { orgName: "delta1", orgSlug: "delta1" }) {
     id
   }
 
-  org3: createOrganization(data: {
-    orgName: "delta19"
-    orgSlug: "DWOC19"
-  }) {
-    id
-  }
-
-  org4: createOrganization(data: {
-    orgName: "delta1"
-    orgSlug: "delta1"
-  }) {
-    id
-  }
-
-  proj3: createProject(data: {
-    organization: {
-      connect: {
-        orgSlug: "DWOC19"
-      }
+  proj3: createProject(
+    data: {
+      organization: { connect: { orgSlug: "DWOC19" } }
+      projName: "DWOCproj2019"
+      projDesc: "Super Random shit"
+      githubUrl: "CPking.github.com"
+      projSlug: "proj123"
     }
-    projName: "DWOCproj2019"
-    projDesc: "Super Random shit"
-    githubUrl: "CPking.github.com"
-    projSlug: "proj123"
-  }) {
+  ) {
     id
   }
 
-  proj4: createProject(data: {
-    organization: {
-      connect: {
-        orgSlug: "delta1"
-      }
+  proj4: createProject(
+    data: {
+      organization: { connect: { orgSlug: "delta1" } }
+      projName: "DWOCproj"
+      projDesc: "Random shit"
+      githubUrl: "Chethan2k1"
+      projSlug: "DWOCproj"
     }
-    projName: "DWOCproj"
-    projDesc: "Random shit"
-    githubUrl: "Chethan2k1"
-    projSlug: "DWOCproj"
-  }) {
+  ) {
     id
   }
 
-  ment3: createMentor(data: {
-    user: {
-      connect: {
-        githubHandle: "CPking"
-      }
+  ment3: createMentor(
+    data: {
+      user: { connect: { githubHandle: "CPking" } }
+      project: { connect: { projSlug: "proj123" } }
     }
-    project: {
-      connect: {
-        projSlug: "proj123"
-      }
-    }
-  }) {
+  ) {
     id
   }
 
-  ment4: createMentor(data: {
-    user: {
-      connect: {
-        githubHandle: "Chethan2k1"
-      }
+  ment4: createMentor(
+    data: {
+      user: { connect: { githubHandle: "Chethan2k1" } }
+      project: { connect: { projSlug: "DWOCproj" } }
     }
-    project: {
-      connect: {
-        projSlug: "DWOCproj"
-      }
-    }
-  }) {
+  ) {
     id
   }
 
-  prop3: createProposal(data: {
-    user: {
-      connect: {
-        githubHandle: "CPking"
-      }
+  prop3: createProposal(
+    data: {
+      user: { connect: { githubHandle: "CPking" } }
+      project: { connect: { projSlug: "proj123" } }
+      isAccepted: false
+      propUrl: "therila"
     }
-    project: {
-      connect: {
-        projSlug: "proj123"
-      }
-    }
-    isAccepted: false
-    propUrl: "therila"
-  }) {
+  ) {
     id
   }
 
-  prop4: createProposal(data: {
-    user: {
-      connect: {
-        githubHandle: "Chethan2k1"
-      }
+  prop4: createProposal(
+    data: {
+      user: { connect: { githubHandle: "Chethan2k1" } }
+      project: { connect: { projSlug: "DWOCproj" } }
+      isAccepted: false
+      propUrl: "therila"
     }
-    project: {
-      connect: {
-        projSlug: "DWOCproj"
-      }
-    }
-    isAccepted: false
-    propUrl: "therila"
-  }) {
+  ) {
     id
   }
 
-  event3: createEvent(data: {
-    eventDesc: "Summa tough da"
-    date: "2009-10-03T12:15:30Z"
-  }) {
+  event3: createEvent(
+    data: { eventDesc: "Summa tough da", date: "2009-10-03T12:15:30Z" }
+  ) {
     id
   }
-  event4: createEvent(data: {
-    eventDesc: "Super tough da"
-    date: "2009-10-03T12:17:30Z"
-  }) {
+  event4: createEvent(
+    data: { eventDesc: "Super tough da", date: "2009-10-03T12:17:30Z" }
+  ) {
     id
   }
-
-
 }
