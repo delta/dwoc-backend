@@ -2,12 +2,12 @@
  * @flow
  */
 
-import { authenticate } from '../authentication';
+import { authenticate } from "../authentication";
 
 type Args = {
   data?: {},
   where?: {},
-  [key: any]: any,
+  [key: any]: any
 };
 
 type Context = {
@@ -15,186 +15,195 @@ type Context = {
   id: string,
   prisma: {
     [key: string]: any
-  },
+  }
 };
 
 async function updateUser(root: any, args: Args, context: Context) {
   //check if user has a valid session
   const authRes = await authenticate(context.session, context.id);
   if (!authRes.isAuth) {
-    throw new Error('login again!');
-  }
-  if (authRes.role !== "Admin") {
-    throw new Error('You do not have access!');
+    throw new Error("Login Again!!");
   }
   return context.prisma.updateUser({
     data: args.data,
-    where: args.where,
+    where: args.where
   });
 }
+
 /*
 Project resolvers
 */
-async function createProject(root, args, context) {
+async function createProject(root: any, args: Args, context: Context) {
   //check if user has a valid session
   const authRes = await authenticate(context.session, context.id);
   if (!authRes.isAuth) {
-    throw new Error('login again!');
+    throw new Error("Login Again!!");
   }
-  if (authRes.role !== "Admin") {
-    throw new Error('You do not have access!');
+  if (authRes.role !== "Mentor" && authRes.role !== "Admin") {
+    throw new Error("Access Denied!");
   }
   return context.prisma.createProject({
-    ...args.data,
+    ...args.data
   });
 }
 
-async function updateProject(root, args, context) {
+async function updateProject(root: any, args: Args, context: Context) {
   //check if user has a valid session
   const authRes = await authenticate(context.session, context.id);
   if (!authRes.isAuth) {
-    throw new Error('login again!');
+    throw new Error("Login Again!!");
   }
-  if (authRes.role !== "Admin") {
-    throw new Error('You do not have access!');
+  if (authRes.role !== "Mentor" && authRes.role !== "Admin") {
+    throw new Error("Access Denied!");
   }
   return context.prisma.updateProject({
     data: args.data,
-    where: args.where,
+    where: args.where
   });
 }
 
-async function deleteProject(root, args, context) {
+async function deleteProject(root: any, args: Args, context: Context) {
   //check if user has a valid session
   const authRes = await authenticate(context.session, context.id);
   if (!authRes.isAuth) {
-    throw new Error('login again!');
+    throw new Error("Login Again!!");
   }
-  if (authRes.role !== "Admin") {
-    throw new Error('You do not have access!');
+  if (authRes.role !== "Mentor" && authRes.role !== "Admin") {
+    throw new Error("Access Denied!");
   }
   return context.prisma.deleteProject({
-    ...args.where,
+    ...args.where
   });
 }
+
 /*
 Org resolvers
 */
-async function createOrganization(root, args, context) {
+async function createOrganization(root: any, args: Args, context: Context) {
   //check if user has a valid session
   const authRes = await authenticate(context.session, context.id);
   if (!authRes.isAuth) {
-    throw new Error('login again!');
+    throw new Error("Login Again!!");
   }
   if (authRes.role !== "Admin") {
-    throw new Error('You do not have access!');
+    throw new Error("Access Denied!");
   }
-  return context.prisma.createOrganization(
-    { ...args.data }
-  );
+  return context.prisma.createOrganization({ ...args.data });
 }
 
-async function updateOrganization(root, args, context) {
+async function updateOrganization(root: any, args: Args, context: Context) {
   //check if user has a valid session
   const authRes = await authenticate(context.session, context.id);
   console.log(authRes);
-  if (!authRes.isAuth || authRes.role !== "Admin") {
-    throw new Error('login again!');
+  if (!authRes.isAuth) {
+    throw new Error("Login Again!!");
+  }
+  if (authRes.role !== "Admin") {
+    throw new Error("Access Denied!");
   }
   return context.prisma.updateOrganization({
     data: args.data,
-    where: args.where,
+    where: args.where
   });
 }
 
-async function deleteOrganization(root, args, context) {
+async function deleteOrganization(root: any, args: Args, context: Context) {
   //check if user has a valid session
   const authRes = await authenticate(context.session, context.id);
   if (!authRes.isAuth) {
-    throw new Error('login again!');
+    throw new Error("Login Again!!");
   }
   if (authRes.role !== "Admin") {
-    throw new Error('You do not have access!');
+    throw new Error("Access Denied!");
   }
   return context.prisma.deleteOrganization({
-    ...args.where,
+    ...args.where
   });
 }
+
 /*
 Proposal resolvers
 */
-async function createProposal(root, args, context) {
+async function createProposal(root: any, args: Args, context: Context) {
   //check if user has a valid session
   const authRes = await authenticate(context.session, context.id);
   if (!authRes.isAuth) {
-    throw new Error('login again!');
+    throw new Error("Login Again!!");
   }
   return context.prisma.createProposal({
-    ...args.data,
+    ...args.data
   });
 }
 
-async function updateProposal(root, args, context) {
+async function updateProposal(root: any, args: Args, context: Context) {
   //check if user has a valid session
   const authRes = await authenticate(context.session, context.id);
   if (!authRes.isAuth) {
-    throw new Error('login again!');
+    throw new Error("Login Again!!");
   }
   return context.prisma.updateProposal({
     data: args.data,
-    where: args.where,
+    where: args.where
   });
 }
 
-async function deleteProposal(root, args, context) {
+async function deleteProposal(root: any, args: Args, context: Context) {
   //check if user has a valid session
   const authRes = await authenticate(context.session, context.id);
   if (!authRes.isAuth) {
-    throw new Error('login again!');
+    throw new Error("Login Again!!");
   }
   return context.prisma.deleteProposal({
-    where: args.where,
+    ...args.where
   });
 }
+
 /*
 Mentor resolvers
 */
-async function createMentor(root, args, context) {
+async function createMentor(root: any, args: Args, context: Context) {
   //check if user has a valid session
   const authRes = await authenticate(context.session, context.id);
   if (!authRes.isAuth) {
-    throw new Error('login again!');
+    throw new Error("Login Again!!");
+  }
+  if (authRes.role !== "Admin") {
+    throw new Error("Access Denied!");
   }
   return context.prisma.createMentor({
-    ...args.data,
+    ...args.data
   });
 }
 
-async function updateMentor(root, args, context) {
+async function updateMentor(root: any, args: Args, context: Context) {
   //check if user has a valid session
   const authRes = await authenticate(context.session, context.id);
   if (!authRes.isAuth) {
-    throw new Error('login again!');
+    throw new Error("Login Again!!");
   }
   if (authRes.role !== "Mentor" && authRes.role !== "Admin") {
-    throw new Error('Cannot change!');
+    throw new Error("Access Denied!");
   }
   return context.prisma.updateMentor({
     data: args.data,
-    where: args.where,
+    where: args.where
   });
 }
 
-async function deleteMentor(root, args, context) {
+async function deleteMentor(root: any, args: Args, context: Context) {
   //check if user has a valid session
   const authRes = await authenticate(context.session, context.id);
   if (!authRes.isAuth) {
-    throw new Error('login again!');
+    throw new Error("Login Again!!");
+  }
+  if (authRes.role !== "Admin") {
+    throw new Error("Access Denied!");
   }
   return context.prisma.deleteMentor({
-    ...args.where,
+    ...args.where
   });
 }
+
 module.exports = {
   updateUser,
   updateProject,
@@ -208,5 +217,5 @@ module.exports = {
   deleteProposal,
   updateMentor,
   createMentor,
-  deleteMentor,
+  deleteMentor
 };
