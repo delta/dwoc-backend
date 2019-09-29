@@ -1,10 +1,12 @@
 type Query {
   info: String!
-  users(where: UserWhereUniqueInput): [User]!
-  projects(where: ProjectWhereUniqueInput): [Project]!
-  organizations(where: OrganizationWhereUniqueInput): [Organization]!
-  mentors(where: MentorWhereUniqueInput): [Mentor]!
-  proposals(where: ProposalWhereUniqueInput): [Proposal]!
+  userProfile: User!
+  users(where: UserWhereInput): [User]!
+  projects(where: ProjectWhereInput): [Project]!
+  organizations(where: OrganizationWhereInput): [Organization]!
+  mentors(where: MentorWhereInput): [Mentor]!
+  userProposals: [Proposal]!
+  proposals(where: ProposalWhereInput): [Proposal]!
 }
 
 type Mutation {
@@ -205,4 +207,48 @@ type Proposal {
   project: Project!
   isAccepted: Boolean!
   propUrl: String!
+}
+
+input UserWhereInput {
+  id: ID
+  firstName: String
+  lastName: String
+  role: roles
+  email: String
+  mobileNumber: String
+  githubHandle: String
+  password: String
+  isVerified: Boolean
+  session: String
+}
+
+input ProjectWhereInput {
+  id: ID
+  organization: OrganizationWhereInput
+  projName: String
+  projSlug: String
+  projDesc: String
+  githubUrl: String
+}
+
+input ProposalWhereInput {
+  id: ID
+  user: UserWhereInput
+  project: ProjectWhereInput
+  isAccepted: Boolean
+  propUrl: String
+}
+
+input MentorWhereInput {
+  id: ID
+  user: UserWhereInput
+  project: ProjectWhereInput
+}
+
+input OrganizationWhereInput {
+  id: ID
+  orgName: String
+  orgSlug: String
+  orgDesc: String
+  githubUrl: String
 }
