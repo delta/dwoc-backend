@@ -23,7 +23,7 @@ function info(): string {
 
 async function userProfile(root: any, args: Args, context: Context) {
   const authRes = await authenticate(context.session, context.id);
-  if(!authRes.isAuth) {
+  if (!authRes.isAuth) {
     throw new Error("Login Again!!");
   }
   return await context.prisma.user({
@@ -36,7 +36,7 @@ async function users(root: any, args: Args, context: Context) {
   if (!authRes.isAuth) {
     throw new Error("Login Again!!");
   }
-  if(authRes.role !== "Admin") {
+  if (authRes.role !== "Admin") {
     throw new Error("Access Denied!!");
   }
   return await context.prisma.users({
@@ -62,7 +62,7 @@ async function userProposals(root: any, args: Args, context: Context) {
     throw new Error("Login Again!!");
   }
   return await context.prisma.proposals({
-    where: {user: {id: context.id}}
+    where: { user: { id: context.id } }
   });
 }
 
@@ -86,6 +86,15 @@ async function mentors(root: any, args: Args, context: Context) {
   });
 }
 
+async function projectsConnection(root: any, args: Args, context: Context) {
+  const connection = await context.prisma.projectsConnection(args);
+  return {
+    ...connection,
+    aggregate: context.prisma.projectsConnection(args).aggregate(),
+  }
+}
+
+
 module.exports = {
   info,
   userProfile,
@@ -94,5 +103,6 @@ module.exports = {
   organizations,
   userProposals,
   proposals,
-  mentors
+  mentors,
+  projectsConnection,
 };
