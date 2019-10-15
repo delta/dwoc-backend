@@ -7,6 +7,7 @@ type Query {
   mentors(where: MentorWhereInput): [Mentor]!
   userProposals: [Proposal]!
   proposals(where: ProposalWhereInput): [Proposal]!
+  projectsConnection(where: ProjectWhereUniqueInput): ProjectConnection!
 }
 
 type Mutation {
@@ -44,6 +45,7 @@ input UserWhereUniqueInput {
 input ProjectWhereUniqueInput {
   id: ID
   projSlug: String
+  organization: OrganizationWhereUniqueInput
 }
 
 input OrganizationWhereUniqueInput {
@@ -251,4 +253,12 @@ input OrganizationWhereInput {
   orgSlug: String
   orgDesc: String
   githubUrl: String
+}
+
+type AggregateProject {
+  count: Int!
+}
+
+type ProjectConnection {
+  aggregate: AggregateProject!
 }
