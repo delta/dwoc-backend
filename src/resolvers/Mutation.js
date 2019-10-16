@@ -3,6 +3,8 @@
  */
 
 import { authenticate } from "../authentication";
+import { GraphQLSchema, GraphQLObjectType, GraphQLBoolean } from "graphql";
+import { GraphQLUpload } from "graphql-upload";
 
 type Args = {
   data?: {},
@@ -204,6 +206,10 @@ async function deleteMentor(root: any, args: Args, context: Context) {
   });
 }
 
+async function uploadFile(root: any, args: Args, context: Context) {
+  console.log(args);
+}
+
 module.exports = {
   updateUser,
   updateProject,
@@ -217,5 +223,6 @@ module.exports = {
   deleteProposal,
   updateMentor,
   createMentor,
-  deleteMentor
+  deleteMentor,
+  uploadFile
 };
