@@ -29,6 +29,7 @@ mutation {
       projDesc: "therila"
       projSlug: "dwocproj1"
       githubUrl: "some"
+      projMinDesc:"hello"
     }
   ) {
     id
@@ -40,6 +41,7 @@ mutation {
       projDesc: "therila"
       projSlug: "dwocproj2"
       githubUrl: "some"
+      projMinDesc:"hello1"
     }
   ) {
     id
@@ -47,7 +49,7 @@ mutation {
   mentor1: createMentor(
     data: {
       user: { connect: { githubHandle: "ahmed-10" } }
-      project: { connect: { projSlug: "dwocproj1" } }
+      organization: { connect: { orgSlug: "delta" } }
     }
   ) {
     id
@@ -55,7 +57,7 @@ mutation {
   mentor2: createMentor(
     data: {
       user: { connect: { githubHandle: "ahmed-20" } }
-      project: { connect: { projSlug: "dwocproj2" } }
+      organization: { connect: { orgSlug: "deltanit" } }
     }
   ) {
     id
@@ -114,6 +116,7 @@ mutation {
       projName: "Firefox"
       projSlug: "firefox"
       organization: { connect: { orgSlug: "mozilla" } }
+      projMinDesc:"hello2"
     }
   ) {
     id
@@ -122,7 +125,7 @@ mutation {
   mentor5: createMentor(
     data: {
       user: { connect: { githubHandle: "abcdef@github" } }
-      project: { connect: { projSlug: "firefox" } }
+      organization: { connect: { orgSlug: "mozilla" } }
     }
   ) {
     id
@@ -161,6 +164,7 @@ mutation {
       projName: "Skype"
       projSlug: "skype"
       organization: { connect: { orgSlug: "microsoft" } }
+      projMinDesc:"hello6"
     }
   ) {
     id
@@ -169,7 +173,7 @@ mutation {
   mentor6: createMentor(
     data: {
       user: { connect: { githubHandle: "ghi@github" } }
-      project: { connect: { projSlug: "skype" } }
+      organization: { connect: { orgSlug: "microsoft" } }
     }
   ) {
     id
@@ -222,6 +226,7 @@ mutation {
       projDesc: "Super Random shit"
       githubUrl: "CPking.github.com"
       projSlug: "proj123"
+      projMinDesc:"hello8"
     }
   ) {
     id
@@ -234,6 +239,7 @@ mutation {
       projDesc: "Random shit"
       githubUrl: "Chethan2k1"
       projSlug: "DWOCproj"
+      projMinDesc:"hello9"
     }
   ) {
     id
@@ -242,7 +248,7 @@ mutation {
   ment3: createMentor(
     data: {
       user: { connect: { githubHandle: "CPking" } }
-      project: { connect: { projSlug: "proj123" } }
+      organization: { connect: { orgSlug: "DWOC19" } }
     }
   ) {
     id
@@ -251,7 +257,7 @@ mutation {
   ment4: createMentor(
     data: {
       user: { connect: { githubHandle: "Chethan2k1" } }
-      project: { connect: { projSlug: "DWOCproj" } }
+      organization: { connect: { orgSlug: "delta1" } }
     }
   ) {
     id

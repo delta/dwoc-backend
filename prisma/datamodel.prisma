@@ -20,7 +20,7 @@ type User {
 type Mentor {
   id: ID! @id
   user: User! @relation(link: INLINE, onDelete: CASCADE)
-  project: Project! @relation(link: INLINE, onDelete: CASCADE)
+  organization: Organization! @relation(link: INLINE, onDelete: CASCADE)
 }
 
 type Proposal {
@@ -38,6 +38,7 @@ type Project {
   projSlug: String! @unique
   projDesc: String
   githubUrl: String
+  projMinDesc: String
 }
 
 type Organization {
