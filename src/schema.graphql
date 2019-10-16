@@ -77,26 +77,25 @@ input UserUpdateInput {
 
 input ProjectCreateInput {
   id: ID
+  organization: OrganizationCreateOneInput!
   projName: String!
   projSlug: String!
   projDesc: String
   githubUrl: String
-  organization: OrganizationCreateOneInput!
+  projMinDesc: String
 }
-
 input OrganizationCreateOneInput {
   create: OrganizationCreateInput
   connect: OrganizationWhereUniqueInput
 }
-
 input ProjectUpdateInput {
+  organization: OrganizationUpdateOneRequiredInput
   projName: String
   projSlug: String
   projDesc: String
   githubUrl: String
-  organization: OrganizationUpdateOneRequiredInput
+  projMinDesc: String
 }
-
 input OrganizationUpdateOneRequiredInput {
   update: OrganizationUpdateInput
   connect: OrganizationWhereUniqueInput
@@ -143,8 +142,21 @@ input OrganizationUpdateInput {
 
 input MentorUpdateInput {
   user: UserUpdateOneRequiredInput
-  project: ProjectUpdateOneRequiredInput
+  organization: OrganizationUpdateOneRequiredInput
 }
+
+input OrganizationUpdateOneRequiredInput {
+  create: OrganizationCreateInput
+  update: OrganizationUpdateDataInput
+  upsert: OrganizationUpsertNestedInput
+  connect: OrganizationWhereUniqueInput
+}
+
+input OrganizationUpsertNestedInput {
+  update: OrganizationUpdateDataInput!
+  create: OrganizationCreateInput!
+}
+
 
 input UserUpdateOneRequiredInput {
   connect: UserWhereUniqueInput
@@ -159,7 +171,7 @@ input ProjectUpdateOneRequiredInput {
 input MentorCreateInput {
   id: ID
   user: UserCreateOneInput!
-  project: ProjectCreateOneInput!
+  organization: OrganizationCreateOneInput!
 }
 
 type User {
@@ -188,6 +200,7 @@ type Project {
   projSlug: String!
   projDesc: String
   githubUrl: String
+  projMinDesc: String
 }
 
 type Organization {
@@ -201,7 +214,7 @@ type Organization {
 type Mentor {
   id: ID!
   user: User!
-  project: Project!
+  organization: Organization!
 }
 
 type Proposal {
@@ -250,6 +263,13 @@ input MentorWhereInput {
 
 input OrganizationWhereInput {
   id: ID
+  orgName: String
+  orgSlug: String
+  orgDesc: String
+  githubUrl: String
+}
+
+input OrganizationUpdateDataInput {
   orgName: String
   orgSlug: String
   orgDesc: String

@@ -16,12 +16,12 @@ type Context = {
   },
 };
 
-async function project(parent: any, args: Args, context: Context) {
+async function organization(parent: any, args: Args, context: Context) {
   return await context.prisma
     .mentor({
       id: parent.id,
     })
-    .project();
+    .organization();
 }
 
 async function user(parent: any, args: Args, context: Context) {
