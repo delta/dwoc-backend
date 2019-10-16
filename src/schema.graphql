@@ -33,6 +33,7 @@ type Mutation {
   updateMentor(data: MentorUpdateInput!, where: MentorWhereUniqueInput!): Mentor
   createMentor(data: MentorCreateInput!): Mentor!
   deleteMentor(where: MentorWhereUniqueInput!): Mentor
+  fileUpload(file: Upload!): File! 
 }
 
 input UserWhereUniqueInput {
