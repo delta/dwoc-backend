@@ -7,6 +7,7 @@ type Query {
   mentors(where: MentorWhereInput): [Mentor]!
   userProposals: [Proposal]!
   proposals(where: ProposalWhereInput): [Proposal]!
+  events: [Event]!
   projectsConnection(where: ProjectWhereUniqueInput): ProjectConnection!
 }
 
@@ -33,7 +34,13 @@ type Mutation {
   updateMentor(data: MentorUpdateInput!, where: MentorWhereUniqueInput!): Mentor
   createMentor(data: MentorCreateInput!): Mentor!
   deleteMentor(where: MentorWhereUniqueInput!): Mentor
-  fileUpload(file: Upload!): File! 
+  uploadFile(file: Upload!): File!
+}
+
+scalar Upload
+
+type File {
+  fileName: String
 }
 
 input UserWhereUniqueInput {
@@ -225,6 +232,12 @@ type Proposal {
   propUrl: String!
 }
 
+type Event {
+  id: ID!
+  date: DateTime!
+  eventDesc: String!
+}
+
 input UserWhereInput {
   id: ID
   firstName: String
@@ -258,7 +271,7 @@ input ProposalWhereInput {
 input MentorWhereInput {
   id: ID
   user: UserWhereInput
-  project: ProjectWhereInput
+  organization: OrganizationWhereInput
 }
 
 input OrganizationWhereInput {
