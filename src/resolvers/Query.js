@@ -86,6 +86,12 @@ async function mentors(root: any, args: Args, context: Context) {
   });
 }
 
+async function events(root: any, args: Args, context: Context) {
+  return await context.prisma.events({
+    where: args.where
+  });
+}
+
 async function projectsConnection(root: any, args: Args, context: Context) {
   const connection = await context.prisma.projectsConnection(args);
   return {
@@ -104,5 +110,6 @@ module.exports = {
   userProposals,
   proposals,
   mentors,
+  events,
   projectsConnection,
 };

@@ -2,3 +2,4 @@ node_modules
 lib
 src/generated
 dist
+yarn-error.log

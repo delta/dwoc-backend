@@ -60,6 +60,7 @@ server.express.get(
 );
 
 server.express.get("/logout", (req, res, next) => {
+  res.cookie("dwoc_user_session", {});
   res.redirect("https://github.com/logout");
 });
 
