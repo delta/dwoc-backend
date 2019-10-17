@@ -134,6 +134,11 @@ input OrganizationCreateInput {
   orgSlug: String!
   orgDesc: String
   githubUrl: String
+  stack: OrganizationCreatestackInput
+}
+
+input OrganizationCreatestackInput {
+  set: [String!]
 }
 
 input OrganizationUpdateInput {
@@ -141,7 +146,13 @@ input OrganizationUpdateInput {
   orgSlug: String
   orgDesc: String
   githubUrl: String
+  stack: OrganizationUpdatestackInput
 }
+
+input OrganizationUpdatestackInput {
+  set: [String!]
+}
+
 
 input MentorUpdateInput {
   user: UserUpdateOneRequiredInput
@@ -211,7 +222,9 @@ type Organization {
   orgSlug: String!
   orgDesc: String
   githubUrl: String
+  stack: [String!]!
 }
+
 
 type Mentor {
   id: ID!
