@@ -33,6 +33,6 @@ async function user(parent: any, args: Args, context: Context) {
 }
 
 module.exports = {
-  project,
+  organization, 
   user,
 };

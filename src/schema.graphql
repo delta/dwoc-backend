@@ -40,7 +40,7 @@ type Mutation {
 scalar Upload
 
 type File {
-  fileName: String
+  fileName: String!
 }
 
 input UserWhereUniqueInput {
@@ -103,10 +103,6 @@ input ProjectUpdateInput {
   githubUrl: String
   projMinDesc: String
 }
-input OrganizationUpdateOneRequiredInput {
-  update: OrganizationUpdateInput
-  connect: OrganizationWhereUniqueInput
-}
 
 input ProposalCreateInput {
   id: ID
@@ -163,7 +159,6 @@ input OrganizationUpsertNestedInput {
   update: OrganizationUpdateDataInput!
   create: OrganizationCreateInput!
 }
-
 
 input UserUpdateOneRequiredInput {
   connect: UserWhereUniqueInput
