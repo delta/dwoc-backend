@@ -19,9 +19,9 @@ type User = {
 passport.use(
   new GitHubStrategy(
     {
-      clientID: "0a73f6b3c7a2a72eb0c2",
-      clientSecret: "8ecf6ade70c3768635f21ef6df9a1170b5d28934",
-      callbackURL: "http://localhost:4000/home"
+      clientID: "35b62bd93dc7d22fce6b",
+      clientSecret: "fdb254cb1c7a3b9e6c90eb2b5b7733c3ec997bdb",
+      callbackURL: "https://delta.nitt.edu/dwocb/home"
     },
     function(
       accessToken: string,

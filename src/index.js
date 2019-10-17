@@ -45,7 +45,7 @@ server.express.get("/login", passport.authenticate("github"));
 server.express.get(
   "/home",
   passport.authenticate("github", {
-    failureRedirect: "http://localhost:4000/login"
+    failureRedirect: "https://delta.nitt.edu/dwocb/login"
   }),
   function(req, res) {
     let session = req.session.passport.user;
@@ -55,13 +55,16 @@ server.express.get(
       JSON.stringify({ session: session.session, id: session.id }),
       { encode: String }
     );
-    res.send("Welcome to DWOC");
+	console.log("cookie sent");
+    res.redirect("https://delta.nitt.edu/dwocf");
+    //res.send("Welcome to DWOC");
   }
 );
 
 server.express.get("/logout", (req, res, next) => {
-  res.cookie("dwoc_user_session", {});
+  res.clearCookie("dwoc_user_session");
   res.redirect("https://github.com/logout");
+
 });
 
-server.start(() => console.log("Server is running on http://localhost:4000"));
+server.start(() => console.log("Server is running on http://localhost:6969"));

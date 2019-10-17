@@ -207,8 +207,11 @@ async function deleteMentor(root: any, args: Args, context: Context) {
 }
 
 async function uploadFile(root: any, args: Args, context: Context) {
-  console.log(args);
-  return {fileName: ""}
+  const file = await args.file;
+  const fileName = file.filename;
+  return {
+    fileName
+  };
 }
 
 module.exports = {
