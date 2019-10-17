@@ -47,6 +47,7 @@ type Organization {
   orgSlug: String! @unique
   orgDesc: String
   githubUrl: String @unique
+  stack: [String]  @scalarList(strategy: RELATION)
 }
 
 type Event {

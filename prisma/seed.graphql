@@ -13,11 +13,11 @@ mutation {
   ) {
     id
   }
-  org1: createOrganization(data: { orgName: "delta-NITT", orgSlug: "delta" }) {
+  org1: createOrganization(data: { orgName: "delta-NITT", orgSlug: "delta", stack:{set:["c++","python"]} }) {
     id
   }
   org2: createOrganization(
-    data: { orgName: "deltaForce-NITT", orgSlug: "deltanit" }
+    data: { orgName: "deltaForce-NITT", orgSlug: "deltanit",stack:{set:["c++","python"]} }
   ) {
     id
   }
@@ -107,7 +107,7 @@ mutation {
     id
   }
 
-  org5: createOrganization(data: { orgName: "Mozilla", orgSlug: "mozilla" }) {
+  org5: createOrganization(data: { orgName: "Mozilla", orgSlug: "mozilla",stack:{set:["c++","python"]} }) {
     id
   }
 
@@ -154,7 +154,7 @@ mutation {
   }
 
   org6: createOrganization(
-    data: { orgName: "Microsoft", orgSlug: "microsoft" }
+    data: { orgName: "Microsoft", orgSlug: "microsoft" ,stack:{set:["c++","python"]}}
   ) {
     id
   }
@@ -211,11 +211,11 @@ mutation {
     id
   }
 
-  org3: createOrganization(data: { orgName: "delta19", orgSlug: "DWOC19" }) {
+  org3: createOrganization(data: { orgName: "delta19", orgSlug: "DWOC19",stack:{set:["c++","python"]} }) {
     id
   }
 
-  org4: createOrganization(data: { orgName: "delta1", orgSlug: "delta1" }) {
+  org4: createOrganization(data: { orgName: "delta1", orgSlug: "delta1",stack:{set:["c++","python"]} }) {
     id
   }
 
