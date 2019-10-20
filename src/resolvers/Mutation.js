@@ -6,6 +6,9 @@ import { authenticate } from "../authentication";
 import { GraphQLSchema, GraphQLObjectType, GraphQLBoolean } from "graphql";
 import { GraphQLUpload } from "graphql-upload";
 
+const fs = require('fs');
+const path = require('path');
+
 type Args = {
   data?: {},
   where?: {},
@@ -207,11 +210,33 @@ async function deleteMentor(root: any, args: Args, context: Context) {
 }
 
 async function uploadFile(root: any, args: Args, context: Context) {
-  const file = await args.file;
-  const fileName = file.filename;
+  //check if user has a valid session
+  const authRes = await authenticate(context.session, context.id);
+  if (!authRes.isAuth) {
+    throw new Error("Login Again!!");
+  }
+
+  const {createReadStream, filename: fileName, mimetype, encoding} = await args.file;
+  const stream = createReadStream();
+  const {id, filePath} = await storeUpload({stream, fileName, id: context.id});
+
   return {
-    fileName
+    fileName,
+    filePath,
   };
+}
+
+const storeUpload = async({stream, fileName, id}) => {
+  let filePath = path.join(__dirname, '..', '..', 'proposals', `${id + fileName}`);
+  //create a file for new proposal
+  fs.closeSync(fs.openSync(filePath, 'w'));
+  //create a writeStream to store incoming stream
+  let writeStream = fs.createWriteStream(filePath);
+  return new Promise((resolve, reject) => {
+    stream.pipe(writeStream)
+    .on('finish', () => resolve({id, filePath}))
+    .on('error', reject);
+  });
 }
 
 module.exports = {
