@@ -38,9 +38,11 @@ type Mutation {
 }
 
 scalar Upload
+scalar DateTime
 
 type File {
   fileName: String!
+  filePath: String!
 }
 
 input UserWhereUniqueInput {
