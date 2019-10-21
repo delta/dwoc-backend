@@ -41,10 +41,15 @@ passport.serializeUser(async (user: User, cb: (a?: any, b?: any) => any) => {
   });
 
   if (findUser.length == 0 || findUser == null || findUser == undefined) {
-    const name = user.profile.name.split(" ");
-    const firstName = name[0];
-    const lastName = name.length > 1 ? name[name.length - 1] : " ";
-    
+    let firstName, lastName;
+    if(user.profile.name == "" || user.profile.name == undefined || user.profile.name == null) {
+      firstName = "";
+      lastName = "";
+    } else {
+      const name = user.profile.name.split(" ");
+      firstName = name[0];
+      lastName = name.length > 1 ? name[name.length - 1] : " ";
+    }
     let newUser = await prisma.createUser({
       firstName: firstName,
       lastName: lastName,
