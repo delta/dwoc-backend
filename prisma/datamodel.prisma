@@ -14,7 +14,8 @@ type User {
   githubHandle: String! @unique
   password: String
   isVerified: Boolean @default(value:false)
-  session: String
+  session: String,
+  profileImage:String
 }
 
 type Mentor {
@@ -48,6 +49,7 @@ type Organization {
   orgDesc: String
   githubUrl: String @unique
   stack: [String]  @scalarList(strategy: RELATION)
+  contactUrl:String
 }
 
 type Event {
