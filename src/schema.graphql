@@ -80,6 +80,7 @@ input UserUpdateInput {
   password: String
   isVerified: Boolean
   session: String
+  profileImage: String
 }
 
 input ProjectCreateInput {
@@ -135,6 +136,7 @@ input OrganizationCreateInput {
   orgDesc: String
   githubUrl: String
   stack: OrganizationCreatestackInput
+  contactUrl: String
 }
 
 input OrganizationCreatestackInput {
@@ -187,18 +189,7 @@ input MentorCreateInput {
   organization: OrganizationCreateOneInput!
 }
 
-type User {
-  id: ID!
-  firstName: String!
-  lastName: String!
-  role: roles
-  email: String
-  mobileNumber: String
-  githubHandle: String!
-  password: String
-  isVerified: Boolean
-  session: String
-}
+
 
 enum roles {
   Dev
@@ -223,8 +214,22 @@ type Organization {
   orgDesc: String
   githubUrl: String
   stack: [String!]!
+  contactUrl: String
 }
 
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  role: roles
+  email: String
+  mobileNumber: String
+  githubHandle: String!
+  password: String
+  isVerified: Boolean
+  session: String
+  profileImage: String
+}
 
 type Mentor {
   id: ID!
@@ -257,11 +262,13 @@ input UserWhereInput {
   password: String
   isVerified: Boolean
   session: String
+  profileImage: String
 }
 
 input ProjectWhereInput {
   id: ID
   organization: OrganizationWhereInput
+  contactUrl: String
   projName: String
   projSlug: String
   projDesc: String

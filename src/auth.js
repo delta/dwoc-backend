@@ -44,12 +44,14 @@ passport.serializeUser(async (user: User, cb: (a?: any, b?: any) => any) => {
     const name = user.profile.name.split(" ");
     const firstName = name[0];
     const lastName = name.length > 1 ? name[name.length - 1] : " ";
+    
     let newUser = await prisma.createUser({
       firstName: firstName,
       lastName: lastName,
       email: user.profile.email,
       githubHandle: user.profile.login,
-      session: user.accessToken
+      session: user.accessToken,
+      profileImage: user.profile.avatar_url
     });
     // console.log('NewUser Created successfullt', newUser);
     cb(null, newUser);
