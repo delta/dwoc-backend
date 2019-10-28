@@ -91,11 +91,14 @@ input ProjectCreateInput {
   projDesc: String
   githubUrl: String
   projMinDesc: String
+  difficulty: difficulties
 }
+
 input OrganizationCreateOneInput {
   create: OrganizationCreateInput
   connect: OrganizationWhereUniqueInput
 }
+
 input ProjectUpdateInput {
   organization: OrganizationUpdateOneRequiredInput
   projName: String
@@ -103,6 +106,7 @@ input ProjectUpdateInput {
   projDesc: String
   githubUrl: String
   projMinDesc: String
+  difficulty: difficulties
 }
 
 input ProposalCreateInput {
@@ -137,6 +141,7 @@ input OrganizationCreateInput {
   githubUrl: String
   stack: OrganizationCreatestackInput
   contactUrl: String
+  communicationChannel: String
 }
 
 input OrganizationCreatestackInput {
@@ -149,6 +154,8 @@ input OrganizationUpdateInput {
   orgDesc: String
   githubUrl: String
   stack: OrganizationUpdatestackInput
+  contactUrl: String
+  communicationChannel: String
 }
 
 input OrganizationUpdatestackInput {
@@ -197,6 +204,12 @@ enum roles {
   Admin
 }
 
+enum difficulties {
+  Easy
+  Medium
+  Hard
+}
+
 type Project {
   id: ID!
   organization: Organization!
@@ -205,6 +218,7 @@ type Project {
   projDesc: String
   githubUrl: String
   projMinDesc: String
+  difficulty: difficulties
 }
 
 type Organization {
@@ -215,6 +229,7 @@ type Organization {
   githubUrl: String
   stack: [String!]!
   contactUrl: String
+  communicationChannel: String
 }
 
 type User {
@@ -273,6 +288,7 @@ input ProjectWhereInput {
   projSlug: String
   projDesc: String
   githubUrl: String
+  difficulty: difficulties
 }
 
 input ProposalWhereInput {
@@ -295,6 +311,7 @@ input OrganizationWhereInput {
   orgSlug: String
   orgDesc: String
   githubUrl: String
+  communicationChannel: String
 }
 
 input OrganizationUpdateDataInput {

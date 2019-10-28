@@ -4,6 +4,12 @@ enum roles {
   Admin
 }
 
+enum difficulties{
+  Easy 
+  Medium 
+  Hard
+}
+
 type User {
   id: ID! @id
   firstName: String!
@@ -40,6 +46,7 @@ type Project {
   projDesc: String
   githubUrl: String
   projMinDesc: String
+  difficulty: difficulties @default(value: Easy)
 }
 
 type Organization {
@@ -50,6 +57,7 @@ type Organization {
   githubUrl: String @unique
   stack: [String]  @scalarList(strategy: RELATION)
   contactUrl:String
+  communicationChannel:String
 }
 
 type Event {
