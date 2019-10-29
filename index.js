@@ -45,9 +45,9 @@ server.express.get("/login", passport.authenticate("github"));
 server.express.get(
   "/home",
   passport.authenticate("github", {
-    failureRedirect: "https://delta.nitt.edu/dwocb/login"
+    failureRedirect: "https://dwoc.io/dwocb/login"
   }),
-  function(req, res) {
+  function (req, res) {
     let session = req.session.passport.user;
     //send cookie to user browser
     res.cookie(
@@ -55,8 +55,8 @@ server.express.get(
       JSON.stringify({ session: session.session, id: session.id }),
       { encode: String }
     );
-	console.log("cookie sent");
-    res.redirect("https://delta.nitt.edu/dwocf");
+    console.log("cookie sent");
+    res.redirect("https://dwoc.io");
     //res.send("Welcome to DWOC");
   }
 );
