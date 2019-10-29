@@ -21,7 +21,7 @@ passport.use(
     {
       clientID: "35b62bd93dc7d22fce6b",
       clientSecret: "fdb254cb1c7a3b9e6c90eb2b5b7733c3ec997bdb",
-      callbackURL: "https://delta.nitt.edu/dwocb/home"
+      callbackURL: "https://dwoc.io/dwocb/home"
     },
     function(
       accessToken: string,
