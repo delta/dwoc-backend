@@ -4,12 +4,12 @@
 
 import { GraphQLServer } from "graphql-yoga";
 import passport from "passport";
-import { prisma } from "./generated/prisma-client";
-import resolvers from "./resolvers";
+import { prisma } from "./src/generated/prisma-client";
+import resolvers from "./src/resolvers";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 
-require("./auth.js");
+require("./src/auth.js");
 
 type Request = {
   request: {
