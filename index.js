@@ -43,7 +43,7 @@ server.express.use(passport.session());
 
 server.express.get("/login", passport.authenticate("github"));
 server.express.get(
-  "/home",
+  "/",
   passport.authenticate("github", {
     failureRedirect: "https://dwoc.io/dwocb/login"
   }),

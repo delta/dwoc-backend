@@ -19,11 +19,11 @@ type User = {
 passport.use(
   new GitHubStrategy(
     {
-      clientID: "35b62bd93dc7d22fce6b",
-      clientSecret: "fdb254cb1c7a3b9e6c90eb2b5b7733c3ec997bdb",
-      callbackURL: "https://dwoc.io/dwocb/home"
+      clientID: "6d835a3733bebf98108b",
+      clientSecret: "c35eb46a6916a93cb9797fa6e79d9de9d6601bba",
+      callbackURL: "https://dwoc.io/dwocb"
     },
-    function(
+    function (
       accessToken: string,
       refreshToken: string,
       profile: { _json: {}, _raw: {} },
@@ -42,7 +42,7 @@ passport.serializeUser(async (user: User, cb: (a?: any, b?: any) => any) => {
 
   if (findUser.length == 0 || findUser == null || findUser == undefined) {
     let firstName, lastName;
-    if(user.profile.name == "" || user.profile.name == undefined || user.profile.name == null) {
+    if (user.profile.name == "" || user.profile.name == undefined || user.profile.name == null) {
       firstName = "";
       lastName = "";
     } else {
@@ -71,6 +71,6 @@ passport.serializeUser(async (user: User, cb: (a?: any, b?: any) => any) => {
   }
 });
 
-passport.deserializeUser(function(user, cb) {
+passport.deserializeUser(function (user, cb) {
   cb(null, user.profile);
 });
