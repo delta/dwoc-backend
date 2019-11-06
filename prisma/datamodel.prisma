@@ -54,6 +54,7 @@ type Organization {
   orgName: String!
   orgSlug: String! @unique
   orgDesc: String
+  orgMaxDesc: String 
   githubUrl: String @unique
   stack: [String]  @scalarList(strategy: RELATION)
   contactUrl:String
