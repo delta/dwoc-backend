@@ -140,6 +140,7 @@ input OrganizationCreateInput {
   orgName: String!
   orgSlug: String!
   orgDesc: String
+  orgMaxDesc: String
   githubUrl: String
   stack: OrganizationCreatestackInput
   contactUrl: String
@@ -154,6 +155,7 @@ input OrganizationUpdateInput {
   orgName: String
   orgSlug: String
   orgDesc: String
+  orgMaxDesc: String
   githubUrl: String
   stack: OrganizationUpdatestackInput
   contactUrl: String
@@ -163,7 +165,6 @@ input OrganizationUpdateInput {
 input OrganizationUpdatestackInput {
   set: [String!]
 }
-
 
 input MentorUpdateInput {
   user: UserUpdateOneRequiredInput
@@ -198,8 +199,6 @@ input MentorCreateInput {
   organization: OrganizationCreateOneInput!
 }
 
-
-
 enum roles {
   Dev
   Mentor
@@ -228,6 +227,7 @@ type Organization {
   orgName: String!
   orgSlug: String!
   orgDesc: String
+  orgMaxDesc: String
   githubUrl: String
   stack: [String!]!
   contactUrl: String
@@ -312,6 +312,7 @@ input OrganizationWhereInput {
   orgName: String
   orgSlug: String
   orgDesc: String
+  orgMaxDesc: String
   githubUrl: String
   communicationChannel: String
 }
@@ -320,6 +321,7 @@ input OrganizationUpdateDataInput {
   orgName: String
   orgSlug: String
   orgDesc: String
+  orgMaxDesc: String
   githubUrl: String
 }
 
