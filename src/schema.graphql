@@ -113,11 +113,12 @@ input ProjectUpdateInput {
 
 input ProposalCreateInput {
   id: ID
+  user: UserCreateOneInput!
+  organization: OrganizationCreateOneInput!
   isAccepted: Boolean
   propUrl: String!
-  user: UserCreateOneInput!
-  project: ProjectCreateOneInput!
 }
+
 
 input UserCreateOneInput {
   connect: UserWhereUniqueInput
@@ -129,10 +130,10 @@ input ProjectCreateOneInput {
 }
 
 input ProposalUpdateInput {
+  user: UserUpdateOneRequiredInput
+  organization: OrganizationUpdateOneRequiredInput
   isAccepted: Boolean
   propUrl: String
-  user: UserUpdateOneRequiredInput
-  project: ProjectUpdateOneRequiredInput
 }
 
 input OrganizationCreateInput {
@@ -257,7 +258,7 @@ type Mentor {
 type Proposal {
   id: ID!
   user: User!
-  project: Project!
+  organization: Organization!
   isAccepted: Boolean!
   propUrl: String!
 }
@@ -296,7 +297,7 @@ input ProjectWhereInput {
 input ProposalWhereInput {
   id: ID
   user: UserWhereInput
-  project: ProjectWhereInput
+  organization: OrganizationWhereInput
   isAccepted: Boolean
   propUrl: String
 }
