@@ -33,7 +33,7 @@ type Mentor {
 type Proposal {
   id: ID! @id
   user: User! @relation(link: INLINE, onDelete: CASCADE)
-  project: Project! @relation(link: INLINE, onDelete: CASCADE)
+  organization: Organization! @relation(link: INLINE, onDelete: CASCADE)
   isAccepted: Boolean! @default(value: false)
   propUrl: String!
 }

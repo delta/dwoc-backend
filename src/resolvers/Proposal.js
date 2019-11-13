@@ -16,12 +16,12 @@ type Context = {
   },
 };
 
-async function project(parent: any, args: Args, context: Context) {
+async function organization(parent: any, args: Args, context: Context) {
   return await context.prisma
     .proposal({
       id: parent.id,
     })
-    .project();
+    .organization();
 }
 
 async function user(parent: any, args: Args, context: Context) {
@@ -33,6 +33,6 @@ async function user(parent: any, args: Args, context: Context) {
 }
 
 module.exports = {
-  project,
+  organization,
   user,
 };
