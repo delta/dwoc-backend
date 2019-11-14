@@ -32,7 +32,16 @@ async function user(parent: any, args: Args, context: Context) {
     .user();
 }
 
+async function file(parent: any, args: Args, context: Context) {
+  return await context.prisma
+    .proposal({
+      id: parent.id,
+    })
+    .file();
+}
+
 module.exports = {
   organization,
   user,
+  file
 };

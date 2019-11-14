@@ -41,6 +41,7 @@ scalar Upload
 scalar DateTime
 
 type File {
+  id: ID! @id
   fileName: String!
   filePath: String!
 }
@@ -115,10 +116,19 @@ input ProposalCreateInput {
   id: ID
   user: UserCreateOneInput!
   organization: OrganizationCreateOneInput!
+  file: FileCreateOneInput!
   isAccepted: Boolean
   propUrl: String!
 }
 
+input FileCreateOneInput {
+  create: FileCreateInput
+}
+
+input FileCreateInput {
+  fileName: String!
+  filePath: String!
+}
 
 input UserCreateOneInput {
   connect: UserWhereUniqueInput
@@ -132,8 +142,25 @@ input ProjectCreateOneInput {
 input ProposalUpdateInput {
   user: UserUpdateOneRequiredInput
   organization: OrganizationUpdateOneRequiredInput
+  file: FileUpdateOneRequiredInput
   isAccepted: Boolean
   propUrl: String
+}
+
+input FileUpdateOneRequiredInput {
+  create: FileCreateInput
+  update: FileUpdateDataInput
+  upsert: FileUpsertNestedInput
+}
+
+input FileUpdateDataInput {
+  fileName: String
+  filePath: String
+}
+
+input FileUpsertNestedInput {
+  update: FileUpdateDataInput!
+  create: FileCreateInput!
 }
 
 input OrganizationCreateInput {
@@ -259,6 +286,7 @@ type Proposal {
   id: ID!
   user: User!
   organization: Organization!
+  file: File!
   isAccepted: Boolean!
   propUrl: String!
 }
@@ -300,6 +328,12 @@ input ProposalWhereInput {
   organization: OrganizationWhereInput
   isAccepted: Boolean
   propUrl: String
+  file: FileWhereInput
+}
+
+input FileWhereInput {
+  fileName: String
+  filePath: String
 }
 
 input MentorWhereInput {
