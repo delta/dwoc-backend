@@ -10,6 +10,12 @@ enum difficulties{
   Hard
 }
 
+type File {
+  id: ID! @id
+  fileName: String!
+  filePath: String!
+}
+
 type User {
   id: ID! @id
   firstName: String!
@@ -34,6 +40,7 @@ type Proposal {
   id: ID! @id
   user: User! @relation(link: INLINE, onDelete: CASCADE)
   organization: Organization! @relation(link: INLINE, onDelete: CASCADE)
+  file: File! @relation(link: INLINE, onDelete: CASCADE)
   isAccepted: Boolean! @default(value: false)
   propUrl: String!
 }
