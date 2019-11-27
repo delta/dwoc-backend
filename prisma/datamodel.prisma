@@ -43,7 +43,6 @@ type Proposal {
   isAccepted: Boolean! @default(value: false)
   propUrl: String!
 }
-
 type Project {
   id: ID! @id
   organization: Organization! @relation(link: INLINE, onDelete: CASCADE)

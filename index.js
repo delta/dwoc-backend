@@ -63,8 +63,15 @@ server.express.get(
 
 server.express.get("/logout", (req, res, next) => {
   res.clearCookie("dwoc_user_session");
-  res.redirect("https://github.com/logout");
+  res.redirect("https://dwoc.io");
 
 });
-
-server.start(() => console.log("Server is running on http://localhost:6969"));
+const options = {
+port: 6969
+}
+server.start(options, ({ port }) =>
+  console.log(
+    `Server started, listening on port ${port} for incoming requests.`,
+  ),
+)
+//server.start((options) => console.log("Server is running on http://localhost:6969"));
