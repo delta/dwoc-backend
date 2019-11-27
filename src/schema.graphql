@@ -5,7 +5,7 @@ type Query {
   projects(where: ProjectWhereInput): [Project]!
   organizations(where: OrganizationWhereInput): [Organization]!
   mentors(where: MentorWhereInput): [Mentor]!
-  userProposals: [Proposal]!
+  userProposals(where: ProposalWhereInput): [Proposal]!
   proposals(where: ProposalWhereInput): [Proposal]!
   events: [Event]!
   projectsConnection(where: ProjectWhereUniqueInput): ProjectConnection!
@@ -41,7 +41,6 @@ scalar Upload
 scalar DateTime
 
 type File {
-  id: ID! @id
   fileName: String!
   filePath: String!
 }
@@ -116,7 +115,6 @@ input ProposalCreateInput {
   id: ID
   user: UserCreateOneInput!
   organization: OrganizationCreateOneInput!
-  file: FileCreateOneInput!
   isAccepted: Boolean
   propUrl: String!
 }
