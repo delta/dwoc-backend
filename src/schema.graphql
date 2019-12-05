@@ -41,6 +41,7 @@ scalar Upload
 scalar DateTime
 
 type File {
+  id: ID!
   fileName: String!
   filePath: String!
 }
