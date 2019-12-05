@@ -216,9 +216,9 @@ async function uploadFile(root: any, args: Args, context: Context) {
     throw new Error("Login Again!!");
   }
 
-  const { createReadStream, filename: fileName, mimetype, encoding } = await args.file;
+  const {createReadStream, filename: fileName,mimetype, encoding} = await args.file;
   const stream = createReadStream();
-  const { id, filePath } = await storeUpload({ stream, fileName, id: context.id });
+  const {id, filePath} = await storeUpload({stream, fileName, args.org, args.num, id: context.id});
 
   return {
     fileName,
@@ -226,8 +226,8 @@ async function uploadFile(root: any, args: Args, context: Context) {
   };
 }
 
-const storeUpload = async ({ stream, fileName, id }) => {
-  let filePath = path.join(__dirname, '..', '..', '..', 'proposals', `${id + fileName}`);
+const storeUpload = async({stream, fileName, org, num, id}) => {
+  let filePath = path.join(__dirname, '../', '../', '../', 'proposals', `${id + fileName + org + num}`);
   //create a file for new proposal
   fs.closeSync(fs.openSync(filePath, 'w'));
   //create a writeStream to store incoming stream
