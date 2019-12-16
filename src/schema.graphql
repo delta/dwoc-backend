@@ -34,11 +34,17 @@ type Mutation {
   updateMentor(data: MentorUpdateInput!, where: MentorWhereUniqueInput!): Mentor
   createMentor(data: MentorCreateInput!): Mentor!
   deleteMentor(where: MentorWhereUniqueInput!): Mentor
-  uploadFile(file: Upload!): File!
+  uploadFile(data: Upload!): File!
 }
 
 scalar Upload
 scalar DateTime
+
+input FileInput {
+  file: Upload!
+  org: ID!
+  num: Int!
+}
 
 type File {
   id: ID!

@@ -215,8 +215,7 @@ async function uploadFile(root: any, args: Args, context: Context) {
   if (!authRes.isAuth) {
     throw new Error("Login Again!!");
   }
-
-  const {createReadStream, filename: fileName,mimetype, encoding} = await args.file;
+  const { createReadStream, filename: fileName, mimetype, encoding } = await args.data;
   const stream = createReadStream();
   const {id, filePath} = await storeUpload({stream, fileName, args.org, args.num, id: context.id});
 
@@ -226,8 +225,9 @@ async function uploadFile(root: any, args: Args, context: Context) {
   };
 }
 
-const storeUpload = async({stream, fileName, org, num, id}) => {
-  let filePath = path.join(__dirname, '../', '../', '../', 'proposals', `${id + fileName + org + num}`);
+const storeUpload = async ({ stream, fileName, id }) => {
+  let timestamp = Date.now();
+  let filePath = path.join(__dirname, '..', '..', '..', 'proposals', `${id + fileName +timestamp}`);
   //create a file for new proposal
   fs.closeSync(fs.openSync(filePath, 'w'));
   //create a writeStream to store incoming stream

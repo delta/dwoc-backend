@@ -45,7 +45,7 @@ type Proposal {
 }
 type Project {
   id: ID! @id
-  organization: Organization! @relation(link: INLINE, onDelete: CASCADE)
+  organization: Organization! @relation(link: INLINE, onDelete: SET_NULL)
   projName: String!
   projSlug: String! @unique
   projDesc: String
