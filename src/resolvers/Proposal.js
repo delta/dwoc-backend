@@ -40,8 +40,17 @@ async function file(parent: any, args: Args, context: Context) {
     .file();
 }
 
+async function mentor(parent: any, args: Args, context: Context) {
+  return await context.prisma
+    .proposal({
+      id: parent.id,
+    })
+    .mentor();
+}
+
 module.exports = {
   organization,
   user,
-  file
+  file,
+  mentor
 };
