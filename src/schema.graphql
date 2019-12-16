@@ -9,6 +9,7 @@ type Query {
   proposals(where: ProposalWhereInput): [Proposal]!
   events: [Event]!
   projectsConnection(where: ProjectWhereUniqueInput): ProjectConnection!
+  selectedProposals(where: ProposalWhereInput): [Proposal]
 }
 
 type Mutation {
@@ -124,6 +125,8 @@ input ProposalCreateInput {
   organization: OrganizationCreateOneInput!
   isAccepted: Boolean
   propUrl: String!
+  propDesc: String!
+  mentor: MentorWhereInput!
 }
 
 input FileCreateOneInput {
@@ -150,6 +153,8 @@ input ProposalUpdateInput {
   file: FileUpdateOneRequiredInput
   isAccepted: Boolean
   propUrl: String
+  propDesc: String
+  mentor: MentorWhereInput
 }
 
 input FileUpdateOneRequiredInput {
@@ -294,6 +299,8 @@ type Proposal {
   file: File!
   isAccepted: Boolean!
   propUrl: String!
+  propDesc: String!
+  mentor: Mentor
 }
 
 type Event {

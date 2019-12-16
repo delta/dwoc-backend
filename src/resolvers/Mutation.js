@@ -217,7 +217,7 @@ async function uploadFile(root: any, args: Args, context: Context) {
   }
   const { createReadStream, filename: fileName, mimetype, encoding } = await args.data;
   const stream = createReadStream();
-  const {id, filePath} = await storeUpload({stream, fileName, args.org, args.num, id: context.id});
+  const {id, filePath} = await storeUpload({stream, fileName, id: context.id});
 
   return {
     fileName,

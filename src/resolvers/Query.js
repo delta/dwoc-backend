@@ -79,6 +79,12 @@ async function proposals(root: any, args: Args, context: Context) {
   });
 }
 
+async function selectedProposals(root: any, args: Args, context: Context) {
+  return await context.prisma.proposals({
+    where: args.where
+  });
+}
+
 async function mentors(root: any, args: Args, context: Context) {
   const authRes = await authenticate(context.session, context.id);
   return await context.prisma.mentors({
@@ -112,4 +118,5 @@ module.exports = {
   mentors,
   events,
   projectsConnection,
+  selectedProposals
 };
